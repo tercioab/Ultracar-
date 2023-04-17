@@ -15,7 +15,7 @@ export default function RegisterClient() {
 
 	const handleFormSubmit = event => {
 		event.preventDefault();
-		const qrCodeString = `${name}, ${plate}, ${model}`;
+    const qrCodeString = `{"nome":"${name}", "placa":"${plate}", "modelo":"${model}"}`;
 		setQRCodeData(qrCodeString);
 	};
 
@@ -79,9 +79,10 @@ export default function RegisterClient() {
 					className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full'
 				>
 					Generate QR Code
-				</button>
+        </button>
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2 w-full" onClick={handleDownloadQRCode}>download</button>
 			</form>
-      <button onClick={handleDownloadQRCode}>download</button>
+     
 			{qrCodeData && (
         <div  className='mt-8 w-full md:w-1/2 lg:w-1/3'>
           <div ref={qrCodeRef}>

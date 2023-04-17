@@ -14,7 +14,7 @@ const QrCodeScanner = () => {
 			console.error("Camera not found.");
 			return;
 		  }
-			const qrScanner = new QrScanner(videoRef.current, result => setResult(result));
+			const qrScanner = new QrScanner(videoRef.current, result => setResult(JSON.parse(result)));
 		  qrScanner.start();
 		  return () => {
 			qrScanner.destroy();
@@ -44,7 +44,7 @@ const QrCodeScanner = () => {
 
 			<div className='mt-4'>
 				<b>Detected QR code:</b>
-				<span className='bg-gray-100 px-2 py-1 rounded'>{result ? result : "None"}</span>
+				<span className='bg-gray-100 px-2 py-1 rounded'>{result ? result.nome : "None"}</span>
 			</div>
 			<button onClick={saveQrCodeDataToLocalStorage}>SALVAR</button>
 		</div>

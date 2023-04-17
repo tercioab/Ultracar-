@@ -14,13 +14,21 @@ const QrCodeScanner = () => {
 			console.error("Camera not found.");
 			return;
 		  }
-		  const qrScanner = new QrScanner(videoRef.current, result => setResult(result));
+			const qrScanner = new QrScanner(videoRef.current, result => setResult(result));
 		  qrScanner.start();
 		  return () => {
 			qrScanner.destroy();
 		  };
 		});
-	  }, []);
+	}, []);
+
+	const saveQrCodeDataToLocalStorage = () => {
+		const storedData = JSON.parse(localStorage.getItem('qrCodes')) || [];
+		storedData.push(result);
+		localStorage.setItem('qrCodes', JSON.stringify(storedData));
+		console.log(JSON.stringify(storedData))
+	  };
+	
 
 	return (
 		<div className='flex flex-col justify-center items-center h-screen'>
@@ -38,6 +46,7 @@ const QrCodeScanner = () => {
 				<b>Detected QR code:</b>
 				<span className='bg-gray-100 px-2 py-1 rounded'>{result ? result : "None"}</span>
 			</div>
+			<button onClick={saveQrCodeDataToLocalStorage}>SALVAR</button>
 		</div>
 	);
 };

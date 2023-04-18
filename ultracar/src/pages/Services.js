@@ -66,85 +66,71 @@ export default function Services() {
 
 	return (
 		<div className='flex flex-col items-center'>
-			<h2 className='text-lg font-bold mb-4'>Selecione um colaborador:</h2>
-			<select
-				className='w-48 rounded-md p-2 mb-4'
-				value={colaboradorSelecionado}
-				onChange={event => setColaboradorSelecionado(event.target.value)}
-			>
-				<option value=''>Todos</option>
-				{colaboradores.map(colaborador => (
-					<option key={colaborador} value={colaborador}>
-						{colaborador}
-					</option>
-				))}
-			</select>
-			<div class='relative overflow-x-auto shadow-md sm:rounded-lg'>
-				{dadosFiltrados.length > 0 && (
-					<table class='text-sm text-left text-gray-500 dark:text-gray-400 mx-auto '>
-						<thead class='text-xs  uppercase bg-gray dark:text-gray'>
-							<tr>
-								<th scope='col' class='px-6 py-3'>
-									Cliente
-								</th>
-								<th scope='col' class='px-6 py-3'>
-									Responsável
-								</th>
-								<th scope='col' class='px-6 py-3'>
-									Placa
-								</th>
-								<th scope='col' class='px-6 py-3'>
-									Modelo
-								</th>
-								<th scope='col' class='px-6 py-3'>
-									status
-								</th>
-								<th scope='col' class='px-6 py-3'>
-									Valor das peças
-								</th>
-								<th scope='col' class='px-6 py-3'>
-									Data inicio
-								</th>
-								<th scope='col' class='px-6 py-3'>
-									Data termino
-								</th>
-								<th scope='col' class='px-6 py-3'></th>
-							</tr>
-						</thead>
-						<tbody>
-							{dadosFiltrados.map((data, index) => (
-								<tr key={index}>
-									<td className='border border-gray py-2 text-center'>{data.cliente}</td>
-									<td className='border border-gray py-2 text-center'>{data.responsavel}</td>
-									<td className='border border-gray py-2 text-center'>{data.placa}</td>
-									<td className='border border-gray py-2 text-center'>{data.modelo}</td>
-									<td className='border border-gray py-2 text-center'>{data.status}</td>
-									<td className='border border-gray py-2 text-center'>{`${
-										data.valor_total ? "$" + data.valor_total : ""
-									}`}</td>
-									<td className='border border-gray py-2 text-center'>{data.data_inicio}</td>
-									<td className='border border-gray py-2 text-center'>{data.data_termino}</td>
-
-									<button
-										className={`bg-green hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full ${
-											!data.data_inicio
-												? "cursor-pointer hover:bg-blue-600"
-												: "cursor-not-allowed opacity-50"
-										}`}
-										onClick={() => selectService(data.placa)}
-									>
-										Selecionar Serviço
-									</button>
-									<button
-										className={`bg-red hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full`}
-										onClick={() => endService(data.placa)}
-									>
-										Finalizar Serviço
-									</button>
-								</tr>
-							))}
-						</tbody>
-					</table>
+  <h2 className='text-lg font-bold mb-4'>Selecione um colaborador:</h2>
+  <select
+    className='w-full md:w-48 rounded-md p-2 mb-4'
+    value={colaboradorSelecionado}
+    onChange={event => setColaboradorSelecionado(event.target.value)}
+  >
+    <option value=''>Todos</option>
+    {colaboradores.map(colaborador => (
+      <option key={colaborador} value={colaborador}>
+        {colaborador}
+      </option>
+    ))}
+  </select>
+  <div className='relative overflow-x-auto shadow-md sm:rounded-lg  mx-auto'>
+    {dadosFiltrados.length > 0 && (
+      <div className='overflow-x-auto'>
+        <table className='table-auto w-full '>
+          <thead>
+            <tr className="bg-gray">
+              <th className='px-4 py-2'>Cliente</th>
+              <th className='px-4 py-2'>Responsável</th>
+              <th className='px-4 py-2'>Placa</th>
+              <th className='px-4 py-2'>Modelo</th>
+              <th className='px-4 py-2'>Status</th>
+              <th className='px-4 py-2'>Valor Total</th>
+              <th className='px-4 py-2'>Data Início</th>
+              <th className='px-4 py-2'>Data Término</th>
+              <th className='px-4 py-2'></th>
+              <th className='px-4 py-2'></th>
+            </tr>
+          </thead>
+          <tbody>
+            {dadosFiltrados.map((data, index) => (
+              <tr key={index}>
+                <td className='border border-gray px-4 py-2 text-center'>{data.cliente}</td>
+                <td className='border border-gray px-4 py-2 text-center'>{data.responsavel}</td>
+                <td className='border border-gray px-4 py-2 text-center'>{data.placa}</td>
+                <td className='border border-gray px-4 py-2 text-center'>{data.modelo}</td>
+                <td className='border border-gray px-4 py-2 text-center'>{data.status}</td>
+                <td className='border border-gray px-4 py-2 text-center'>{data.valor_total ? `$${data.valor_total}` : ''}</td>
+                <td className='border border-gray px-4 py-2 text-center'>{data.data_inicio}</td>
+                <td className='border border-gray px-4 py-2 text-center'>{data.data_termino}</td>
+                <td className='border border-gray px-4 py-2 text-center'>
+                  <button
+                    className={`bg-green hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full ${
+                      !data.data_inicio ? "cursor-pointer hover:bg-blue-600" : "cursor-not-allowed opacity-50"
+                    }`}
+                    onClick={() => selectService(data.placa)}
+                  >
+                    Selecionar Serviço
+						  </button>
+						</td>
+						<td className='border border-gray px-4 py-2 text-center'>
+						  <button
+							className='bg-red hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full'
+							onClick={() => endService(data.placa)}
+						  >
+							Finalizar Serviço
+						  </button>
+						</td>
+					  </tr>
+					))}
+				  </tbody>
+				</table>
+			  </div>
 				)}
 			</div>
 			<form className='max-w-md mx-auto'>

@@ -92,14 +92,14 @@ export default function RegisterClient() {
 							type='submit'
 							className='bg-green hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full'
 						>
-							Generate QR Code
+							Registrar Cliente
 						</button>
 					</form>
 					<button
 						className='bg-green hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2 w-full'
 						onClick={handleDownloadQRCode}
 					>
-						download
+						Download qr code
 					</button>
 				</div>
 				{qrCodeData && (

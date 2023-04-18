@@ -79,56 +79,74 @@ export default function Services() {
 					</option>
 				))}
 			</select>
-
-			{dadosFiltrados.length > 0 && (
-				<table className='w-full table-fixed text-center'>
-					<thead>
-						<tr>
-							<th className='w-1/4 py-2'>Cliente</th>
-							<th className='w-1/4 py-2'>Responsável</th>
-							<th className='w-1/4 py-2'>Placa</th>
-							<th className='w-1/4 py-2'>Modelo</th>
-							<th className='w-1/4 py-2'>status</th>
-							<th className='w-1/4 py-2'>Valor das peças</th>
-							<th className='w-1/4 py-2'>Data inicio</th>
-							<th className='w-1/4 py-2'>Data termino</th>
-							<th className='w-1/4 py-2'></th>
-						</tr>
-					</thead>
-					<tbody>
-						{dadosFiltrados.map((data, index) => (
-							<tr key={index}>
-								<td className='border py-2'>{data.cliente}</td>
-								<td className='border py-2'>{data.responsavel}</td>
-								<td className='border py-2'>{data.placa}</td>
-								<td className='border py-2'>{data.modelo}</td>
-								<td className='border py-2'>{data.status}</td>
-								<td className='border py-2'>{`${
-									data.valor_total ? "$" + data.valor_total : ""
-								}`}</td>
-								<td className='border py-2'>{data.data_inicio}</td>
-								<td className='border py-2'>{data.data_termino}</td>
-								<button
-									className={`bg-green hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full ${
-										!data.data_inicio
-											? "cursor-pointer hover:bg-blue-600"
-											: "cursor-not-allowed opacity-50"
-									}`}
-									onClick={() => selectService(data.placa)}
-								>
-									Selecionar Serviço
-								</button>
-								<button
-									className={`bg-red hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full`}
-									onClick={() => endService(data.placa)}
-								>
-									Finalizar Serviço
-								</button>
+			<div class='relative overflow-x-auto shadow-md sm:rounded-lg'>
+				{dadosFiltrados.length > 0 && (
+					<table class='text-sm text-left text-gray-500 dark:text-gray-400 mx-auto '>
+						<thead class='text-xs  uppercase bg-gray dark:text-gray'>
+							<tr>
+								<th scope='col' class='px-6 py-3'>
+									Cliente
+								</th>
+								<th scope='col' class='px-6 py-3'>
+									Responsável
+								</th>
+								<th scope='col' class='px-6 py-3'>
+									Placa
+								</th>
+								<th scope='col' class='px-6 py-3'>
+									Modelo
+								</th>
+								<th scope='col' class='px-6 py-3'>
+									status
+								</th>
+								<th scope='col' class='px-6 py-3'>
+									Valor das peças
+								</th>
+								<th scope='col' class='px-6 py-3'>
+									Data inicio
+								</th>
+								<th scope='col' class='px-6 py-3'>
+									Data termino
+								</th>
+								<th scope='col' class='px-6 py-3'></th>
 							</tr>
-						))}
-					</tbody>
-				</table>
-			)}
+						</thead>
+						<tbody>
+							{dadosFiltrados.map((data, index) => (
+								<tr key={index}>
+									<td className='border border-gray py-2 text-center'>{data.cliente}</td>
+									<td className='border border-gray py-2 text-center'>{data.responsavel}</td>
+									<td className='border border-gray py-2 text-center'>{data.placa}</td>
+									<td className='border border-gray py-2 text-center'>{data.modelo}</td>
+									<td className='border border-gray py-2 text-center'>{data.status}</td>
+									<td className='border border-gray py-2 text-center'>{`${
+										data.valor_total ? "$" + data.valor_total : ""
+									}`}</td>
+									<td className='border border-gray py-2 text-center'>{data.data_inicio}</td>
+									<td className='border border-gray py-2 text-center'>{data.data_termino}</td>
+
+									<button
+										className={`bg-green hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full ${
+											!data.data_inicio
+												? "cursor-pointer hover:bg-blue-600"
+												: "cursor-not-allowed opacity-50"
+										}`}
+										onClick={() => selectService(data.placa)}
+									>
+										Selecionar Serviço
+									</button>
+									<button
+										className={`bg-red hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full`}
+										onClick={() => endService(data.placa)}
+									>
+										Finalizar Serviço
+									</button>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				)}
+			</div>
 			<form className='max-w-md mx-auto'>
 				<label className='block mb-4 mt-4'>
 					Responsável:

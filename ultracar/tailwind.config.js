@@ -10,9 +10,9 @@ module.exports = {
       'orange': '#ff7849',
       'green': '#28A745',
       'red': '#E53E3E',
-      'gray-dark': '#273444',
-      'gray': '#8492a6',
+      'gray': '#E5E7EB',
       'gray-light': '#d3dce6',
+      'white': ' #FFFFFF'
     },
     extend: {},
   },

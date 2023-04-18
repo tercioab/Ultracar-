@@ -1,34 +1,54 @@
-import React, { useEffect, useState,  useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import QrScanner from "qr-scanner";
 
-QrScanner.WORKER_PATH = "../../public/qr-scanner-worker.min.js";
-
-const QrCodeScanner = () => {
+export default function QrCodeScanner() {
 	const [result, setResult] = useState(null);
 	const videoRef = useRef(null);
+	const [responsavel, setResponsavel] = useState("");
+
+	let navigate = useNavigate();
 
 	useEffect(() => {
-		QrScanner.WORKER_PATH = "/qr-scanner-worker.min.js";
 		QrScanner.hasCamera().then(hasCamera => {
-		  if (!hasCamera) {
-			console.error("Camera not found.");
-			return;
-		  }
-			const qrScanner = new QrScanner(videoRef.current, result => setResult(JSON.parse(result)));
-		  qrScanner.start();
-		  return () => {
-			qrScanner.destroy();
-		  };
+			if (!hasCamera) {
+				console.error("Camera not found.");
+				return;
+			}
+			const qrScanner = new QrScanner(videoRef.current, result =>
+				setResult(JSON.parse(result)),
+			);
+			qrScanner.start();
+			return () => {
+				qrScanner.destroy();
+			};
 		});
 	}, []);
 
-	const saveQrCodeDataToLocalStorage = () => {
-		const storedData = JSON.parse(localStorage.getItem('qrCodes')) || [];
-		storedData.push(result);
-		localStorage.setItem('qrCodes', JSON.stringify(storedData));
-		console.log(JSON.stringify(storedData))
-	  };
-	
+	const updateServiceDataToLocalStorage = () => {
+		const storedData = JSON.parse(localStorage.getItem("services")) || [];
+		const date = new Date();
+		const formattedDate = `${date.getFullYear()}:${
+			date.getMonth() + 1
+		}:${date.getDate()}`;
+		const updatedData = storedData.filter(service => {
+			if (service.placa === result.placa) {
+				service.responsavel = responsavel;
+				service.data_inicio = formattedDate;
+				service.status = "Em andamento";
+				return service;
+			}
+			return service;
+		});
+
+		localStorage.setItem("services", JSON.stringify(updatedData));
+	};
+
+	const handleSubmit = e => {
+		e.preventDefault();
+		navigate("/iniciar-servico");
+		updateServiceDataToLocalStorage();
+	};
 
 	return (
 		<div className='flex flex-col justify-center items-center h-screen'>
@@ -43,12 +63,46 @@ const QrCodeScanner = () => {
 			</div>
 
 			<div className='mt-4'>
-				<b>Detected QR code:</b>
-				<span className='bg-gray-100 px-2 py-1 rounded'>{result ? result.nome : "None"}</span>
+				<form onSubmit={handleSubmit} className='max-w-md mx-auto'>
+					<label className='block mb-4 mt-4'>
+						Responsável:
+						<input
+							type='text'
+							value={responsavel}
+							onChange={event => setResponsavel(event.target.value)}
+							className='border-gray-300 border-2 rounded-md p-2 w-full'
+						/>
+					</label>
+					{result && (
+						<div className='border border-gray-200 rounded-md p-2 mt-2'>
+							<div className='grid grid-cols-3 gap-4'>
+								<div className='col-span-1 font-bold'>Cliente:</div>
+								<div className='col-span-2'>{result?.cliente}</div>
+							</div>
+							<div className='grid grid-cols-3 gap-4'>
+								<div className='col-span-1 font-bold'>Placa:</div>
+								<div className='col-span-2'>{result?.placa}</div>
+							</div>
+							<div className='grid grid-cols-3 gap-4'>
+								<div className='col-span-1 font-bold'>Modelo:</div>
+								<div className='col-span-2'>{result?.modelo}</div>
+							</div>
+						</div>
+					)}
+					<button
+						href='/register-client'
+						type='submit'
+						className={`bg-blue-500 text-white font-semibold py-2 px-4 rounded-md mt-4 ${
+							responsavel && result
+								? "cursor-pointer hover:bg-blue-600"
+								: "cursor-not-allowed opacity-50"
+						}`}
+						disabled={!responsavel}
+					>
+						Iniciar serviço
+					</button>
+				</form>
 			</div>
-			<button onClick={saveQrCodeDataToLocalStorage}>SALVAR</button>
 		</div>
 	);
-};
-
-export default QrCodeScanner;
+}

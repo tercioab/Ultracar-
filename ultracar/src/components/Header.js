@@ -6,7 +6,7 @@ export default function Header() {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
 	return (
-		<header className='bg-white border-b-2 border-blue-2'>
+		<header className='bg- rounded-lg shadow dark:bg-gray-900 m-4 border-b-2 border-blue-2'>
 			<nav
 				className='mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8 mb'
 				aria-label='Global'

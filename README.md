@@ -19,7 +19,7 @@ Em seguida, digite o comando npm start para iniciar o servidor de desenvolviment
 Abra o navegador e acesse http://localhost:3000 para visualizar o projeto em execução.
 
 ## ATENÇÃO ⚠️⚠️⚠️
-A lógica por trás da utilização do QR code baseia-se no princípio de que o cliente irá imprimir o PDF e, em seguida, ler o código com o mesmo dispositivo que o gerou. Se o código for gerado em um dispositivo e lido em outro, não funcionará, pois os dados nesse primeiro momento ficam são salvos no local storage. Portanto, é importante que o cliente utilize o mesmo dispositivo para gerar e ler o QR code.
+A lógica por trás da utilização do QR code baseia-se no princípio de que o cliente irá imprimir o PDF e, em seguida, ler o código com o mesmo dispositivo que o gerou. Se o código for gerado em um dispositivo e lido em outro, não funcionará, pois os dados nesse primeiro momento ficam são salvos no local storage. Portanto, é importante que o cliente utilize o mesmo dispositivo para gerar e ler o QR code. ( uma dica para teste é gerar o Qr code no computador tirar uma foto com seu despositivo movel e depois aponta-lo para sua webcam)
 
 ## O que foi utilizado no projeto
 

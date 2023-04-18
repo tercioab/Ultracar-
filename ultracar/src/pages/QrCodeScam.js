@@ -53,13 +53,18 @@ export default function QrCodeScanner() {
 
 	return (
 		<div className='flex flex-col justify-center items-center h-screen'>
-			<h1 className='text-2xl font-bold mb-4'>Scan from WebCam:</h1>
+			<h1 className='text-1xl font-bold mb-4'>Aponte a camera para o qr code</h1>
 
-			<div className='relative bg-gray-200 rounded-lg p-20 shadow-md border-2 border-gray-400'>
+			
+			<div
+				className='relative bg-blue-2  p-20  border-4 border-blue-1'
+				style={{ width: "400px", height: "400px" }}
+			>
 				<video
 					id='qr-video'
 					ref={videoRef}
-					className='absolute top-0 left-0 w-full h-full object-cover rounded-lg'
+					className='absolute top-0 left-0 w-full h-full object-cover'
+					style={{ width: "100%", height: "100%" }}
 				></video>
 			</div>
 

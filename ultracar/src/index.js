@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import RegisterClient from './pages/RegisterClient';
 import QrCodeScanner from './pages/QrCodeScam';
+import Services from './pages/Services';
 import "./Global.css";
 
 
@@ -9,6 +10,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+
 
 const router = createBrowserRouter(
   [
@@ -19,6 +21,10 @@ const router = createBrowserRouter(
     {
       path: "/qr-scanner",
       element: <QrCodeScanner />
+    },
+    {
+      path: "/services",
+      element: <Services />
     }
 ]
    

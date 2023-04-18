@@ -6,7 +6,7 @@ export default function Header() {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
 	return (
-		<header className='bg-white border-b-2 border-blue-300'>
+		<header className='bg-white border-b-2 border-blue-2'>
 			<nav
 				className='mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8 mb'
 				aria-label='Global'
@@ -32,14 +32,14 @@ export default function Header() {
 				<Popover.Group className='hidden lg:flex lg:gap-x-12'>
 					<a
 						href='/register-client'
-						className='text-sm font-semibold leading-6 text-gray-900'
+						className='text-sm font-semibold leading-6 text-blue-1'
 					>
 						Registrar cliente
 					</a>
-					<a href='/qr-scanner' className='text-sm font-semibold leading-6 text-gray-900'>
+					<a href='/qr-scanner' className='text-sm font-semibold leading-6 text-blue-1'>
 						Scanner
 					</a>
-					<a href='/services' className='text-sm font-semibold leading-6 text-gray-900'>
+					<a href='/services' className='text-sm font-semibold leading-6 text-blue-1'>
 						Serviços
 					</a>
 				</Popover.Group>

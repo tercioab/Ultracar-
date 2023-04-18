@@ -109,7 +109,7 @@ export default function Services() {
 								<td className='border py-2'>{data.data_inicio}</td>
 								<td className='border py-2'>{data.data_termino}</td>
 								<button
-									className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full ${
+									className={`bg-green hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full ${
 										!data.data_inicio
 											? "cursor-pointer hover:bg-blue-600"
 											: "cursor-not-allowed opacity-50"
@@ -119,7 +119,7 @@ export default function Services() {
 									Selecionar Serviço
 								</button>
 								<button
-									className={`bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full`}
+									className={`bg-red hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full`}
 									onClick={() => endService(data.placa)}
 								>
 									Finalizar Serviço
@@ -158,7 +158,7 @@ export default function Services() {
 			</form>
 			<button
 				onClick={updateServiceDataToLocalStorage}
-				className={`bg-blue-500 text-white font-semibold py-2 px-4 rounded-md mt-4 ${
+				className={`bg-green text-white font-semibold py-2 px-4 rounded-md mt-4 ${
 					responsavel && serviceSelected
 						? "cursor-pointer hover:bg-blue-600"
 						: "cursor-not-allowed opacity-50"

@@ -93,14 +93,14 @@ export default function QrCodeScanner() {
 					<button
 						href='/register-client'
 						type='submit'
-						className={`bg-blue-500 text-white font-semibold py-2 px-4 rounded-md mt-4 ${
+						className={`bg-green text-white font-semibold py-2 px-4 rounded-md mt-4 ${
 							responsavel && result
 								? "cursor-pointer hover:bg-blue-600"
 								: "cursor-not-allowed opacity-50"
 						}`}
 						disabled={!responsavel}
 					>
-						Iniciar serviço
+						Registrar Serviço
 					</button>
 				</form>
 			</div>

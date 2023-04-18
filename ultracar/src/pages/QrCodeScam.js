@@ -30,7 +30,7 @@ export default function QrCodeScanner() {
 		const date = new Date();
 		const formattedDate = `${date.getFullYear()}:${
 			date.getMonth() + 1
-		}:${date.getDate()}`;
+		  }:${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
 		const updatedData = storedData.filter(service => {
 			if (service.placa === result.placa) {
 				service.responsavel = responsavel;
@@ -46,6 +46,7 @@ export default function QrCodeScanner() {
 
 	const handleSubmit = e => {
 		e.preventDefault();
+		localStorage.setItem("plate", result.placa);
 		navigate("/iniciar-servico");
 		updateServiceDataToLocalStorage();
 	};

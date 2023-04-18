@@ -67,7 +67,7 @@ export default function Services() {
 
 	return (
 		<div>
-			<div className='flex justify-center m-8'>
+			<div className='flex justify-center m-8 '>
 				<div>
 					<h2 className='text-lg font-bold mb-4'>Selecione um colaborador</h2>
 					<select
@@ -187,7 +187,7 @@ export default function Services() {
 				)}
 				<button
 					onClick={updateServiceDataToLocalStorage}
-					className={`bg-green  w-full text-white font-semibold py-2 px-4 rounded-md mt-4 ${
+					className={`bg-green  w-full  mb-16 text-white font-semibold py-2 px-4 rounded-md mt-4 ${
 						responsavel && serviceSelected
 							? "cursor-pointer hover:bg-blue-600"
 							: "cursor-not-allowed opacity-50"

@@ -19,9 +19,10 @@ export default function Services() {
 	const updateServiceDataToLocalStorage = () => {
 		const storedData = JSON.parse(localStorage.getItem("services")) || [];
 		const date = new Date();
-		const formattedDate = `${date.getFullYear()}:${
+		const formattedDate = `${date.getDate()}:${
 			date.getMonth() + 1
-		}:${date.getDate()}`;
+		}:${date.getFullYear()}  H${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+
 		const updatedData = storedData.filter(service => {
 			if (service.placa === serviceSelected.placa) {
 				service.responsavel = responsavel;

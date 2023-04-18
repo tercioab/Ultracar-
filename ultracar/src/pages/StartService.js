@@ -54,7 +54,7 @@ export default function StartService() {
 					<tr className='bg-gray-100'>
 						<th className='text-left py-2 px-3'>Peça</th>
 						<th className='text-left py-2 px-3'>Preço</th>
-						<th className='text-left py-2 px-3'>Ações</th>
+						<th className='text-left py-2 px-3'></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -64,7 +64,7 @@ export default function StartService() {
 							<td className='py-2 px-3'>R$ {Number(pice.price).toFixed(2)}</td>
 							<td className='py-2 px-3'>
 								<button
-									className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'
+									className='bg-red hover:bg-red text-white font-bold py-2 px-4 rounded'
 									onClick={() => removePice(pice)}
 								>
 									Remover
@@ -74,7 +74,7 @@ export default function StartService() {
 					))}
 				</tbody>
             </table>
-            <button className='bg-green-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4' onClick={updateServiceDataToLocalStorage}>iniciar serviço</button>
+            <button className='bg-green hover:bg-red text-white font-bold py-2 px-4 rounded mt-4' onClick={updateServiceDataToLocalStorage}>iniciar serviço</button>
 			<p className='text-xl font-bold mt-4'>
 				Valor total: R$ {Number(totalValue).toFixed(2)}
 			</p>

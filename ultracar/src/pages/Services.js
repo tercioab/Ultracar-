@@ -32,11 +32,26 @@ export default function Services() {
 			return service;
 		});
     localStorage.setItem("services", JSON.stringify(updatedData));
+  
     navigate("/iniciar-servico");
-	};
+  };
+  
+  const endService = placa => {
+    const storedData = JSON.parse(localStorage.getItem("services")) || [];
+	
+		const updatedData = storedData.filter(service => {
+			if (service.placa === placa) {
+				service.status = "Finalizado";
+				return service;
+			}
+			return service;
+		});
+    localStorage.setItem("services", JSON.stringify(updatedData));
+  }
 
 	const selectService = placa => {
-		const service = storedData.find(data => data.placa === placa);
+    const service = storedData.find(data => data.placa === placa);
+    localStorage.setItem("plate", placa )
 		setServiceSelected(service);
 	};
 
@@ -63,7 +78,9 @@ export default function Services() {
 							<th className='w-1/4 py-2'>Cliente</th>
 							<th className='w-1/4 py-2'>Responsável</th>
 							<th className='w-1/4 py-2'>Placa</th>
-							<th className='w-1/4 py-2'>Modelo</th>
+              <th className='w-1/4 py-2'>Modelo</th>
+              <th className='w-1/4 py-2'>status</th>
+              <th className='w-1/4 py-2'>Valor das peças</th>
 							<th className='w-1/4 py-2'>Data</th>
 							<th className='w-1/4 py-2'></th>
 						</tr>
@@ -74,7 +91,9 @@ export default function Services() {
 								<td className='border py-2'>{data.cliente}</td>
 								<td className='border py-2'>{data.responsavel}</td>
 								<td className='border py-2'>{data.placa}</td>
-								<td className='border py-2'>{data.modelo}</td>
+                <td className='border py-2'>{data.modelo}</td>
+                <td className='border py-2'>{data.status}</td>
+                <td className='border py-2'>{`${data.valor_total ? '$'+data.valor_total : ''}`}</td>
 								<td className='border py-2'>{data.data_inicio}</td>
 								<button
 									className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full ${
@@ -85,6 +104,12 @@ export default function Services() {
 									onClick={() => selectService(data.placa)}
 								>
 									Selecionar Serviço
+                </button>
+                <button
+									className={`bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full`}
+									onClick={() => endService(data.placa)}
+								>
+									Finalizar Serviço
 								</button>
 							</tr>
 						))}

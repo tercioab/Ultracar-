@@ -66,84 +66,109 @@ export default function Services() {
 	};
 
 	return (
-		<div className='flex flex-col items-center'>
-  <h2 className='text-lg font-bold mb-4'>Selecione um colaborador:</h2>
-  <select
-    className='w-full md:w-48 rounded-md p-2 mb-4'
-    value={colaboradorSelecionado}
-    onChange={event => setColaboradorSelecionado(event.target.value)}
-  >
-    <option value=''>Todos</option>
-    {colaboradores.map(colaborador => (
-      <option key={colaborador} value={colaborador}>
-        {colaborador}
-      </option>
-    ))}
-  </select>
-  <div className='relative overflow-x-auto shadow-md sm:rounded-lg  mx-auto'>
-    {dadosFiltrados.length > 0 && (
-      <div className='overflow-x-auto'>
-        <table className='table-auto w-full '>
-          <thead>
-            <tr className="bg-gray">
-              <th className='px-4 py-2'>Cliente</th>
-              <th className='px-4 py-2'>Responsável</th>
-              <th className='px-4 py-2'>Placa</th>
-              <th className='px-4 py-2'>Modelo</th>
-              <th className='px-4 py-2'>Status</th>
-              <th className='px-4 py-2'>Valor Total</th>
-              <th className='px-4 py-2'>Data Início</th>
-              <th className='px-4 py-2'>Data Término</th>
-              <th className='px-4 py-2'></th>
-              <th className='px-4 py-2'></th>
-            </tr>
-          </thead>
-          <tbody>
-            {dadosFiltrados.map((data, index) => (
-              <tr key={index}>
-                <td className='border border-gray px-4 py-2 text-center'>{data.cliente}</td>
-                <td className='border border-gray px-4 py-2 text-center'>{data.responsavel}</td>
-                <td className='border border-gray px-4 py-2 text-center'>{data.placa}</td>
-                <td className='border border-gray px-4 py-2 text-center'>{data.modelo}</td>
-                <td className='border border-gray px-4 py-2 text-center'>{data.status}</td>
-                <td className='border border-gray px-4 py-2 text-center'>{data.valor_total ? `$${data.valor_total}` : ''}</td>
-                <td className='border border-gray px-4 py-2 text-center'>{data.data_inicio}</td>
-                <td className='border border-gray px-4 py-2 text-center'>{data.data_termino}</td>
-                <td className='border border-gray px-4 py-2 text-center'>
-                  <button
-                    className={`bg-green hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full ${
-                      !data.data_inicio ? "cursor-pointer hover:bg-blue-600" : "cursor-not-allowed opacity-50"
-                    }`}
-                    onClick={() => selectService(data.placa)}
-                  >
-                    Selecionar Serviço
-						  </button>
-						</td>
-						<td className='border border-gray px-4 py-2 text-center'>
-						  <button
-							className='bg-red hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full'
-							onClick={() => endService(data.placa)}
-						  >
-							Finalizar Serviço
-						  </button>
-						</td>
-					  </tr>
-					))}
-				  </tbody>
-				</table>
-			  </div>
+		<div>
+			<div className='flex justify-center m-8'>
+				<div>
+					<h2 className='text-lg font-bold mb-4'>Selecione um colaborador</h2>
+					<select
+						className='w-full md:w-48 rounded-md p-2 mb-4 text-sm font-medium text-slate-900'
+						value={colaboradorSelecionado}
+						onChange={event => setColaboradorSelecionado(event.target.value)}
+					>
+						<option value=''>Todos</option>
+						{colaboradores.map(colaborador => (
+							<option key={colaborador} value={colaborador}>
+								{colaborador}
+							</option>
+						))}
+					</select>
+				</div>
+			</div>
+
+			<div className='mx-10'>
+				{dadosFiltrados.length > 0 && (
+					<div className=' overflow-x-auto justify-center'>
+						<table className='md:table-fixed'>
+							<thead>
+								<tr className='bg-gray'>
+									<th className='px-4 py-2'>Cliente</th>
+									<th className='px-4 py-2'>Responsável</th>
+									<th className='px-4 py-2'>Placa</th>
+									<th className='px-4 py-2'>Modelo</th>
+									<th className='px-4 py-2'>Status</th>
+									<th className='px-4 py-2'>Valor Total</th>
+									<th className='px-4 py-2'>Data Início</th>
+									<th className='px-4 py-2'>Data Término</th>
+									<th className='px-4 py-2'></th>
+									<th className='px-4 py-2'></th>
+								</tr>
+							</thead>
+							<tbody>
+								{dadosFiltrados.map((data, index) => (
+									<tr key={index}>
+										<td className='border border-gray px-4 py-2 text-center whitespace-nowrap'>
+											{data.cliente}
+										</td>
+										<td className='border border-gray px-4 py-2 text-center whitespace-nowrap'>
+											{data.responsavel}
+										</td>
+										<td className='border border-gray px-4 py-2 text-center whitespace-nowrap'>
+											{data.placa}
+										</td>
+										<td className='border border-gray px-4 py-2 text-center whitespace-nowrap'>
+											{data.modelo}
+										</td>
+										<td className='border border-gray px-4 py-2 text-center whitespace-nowrap'>
+											{data.status}
+										</td>
+										<td className='border border-gray px-4 py-2 text-center whitespace-nowrap'>
+											{data.valor_total ? `$${data.valor_total}` : ""}
+										</td>
+										<td className='border border-gray px-4 py-2 text-center whitespace-nowrap'>
+											{data.data_inicio}
+										</td>
+										<td className='border border-gray px-4 py-2 text-center whitespace-nowrap'>
+											{data.data_termino}
+										</td>
+										<td className='border border-gray px-4 py-2 text-center whitespace-nowrap'>
+											<button
+												className={`bg-green hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full ${
+													!data.data_inicio
+														? "cursor-pointer hover:bg-blue-600"
+														: "cursor-not-allowed opacity-50"
+												}`}
+												onClick={() => selectService(data.placa)}
+											>
+												Selecionar Serviço
+											</button>
+										</td>
+										<td className='border border-gray px-4 py-2 text-center'>
+											<button
+												className='bg-red hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full'
+												onClick={() => endService(data.placa)}
+											>
+												Finalizar Serviço
+											</button>
+										</td>
+									</tr>
+								))}
+							</tbody>
+						</table>
+					</div>
 				)}
 			</div>
-			<form className='max-w-md mx-auto'>
-				<label className='block mb-4 mt-4'>
-					Responsável:
-					<input
-						type='text'
-						value={responsavel}
-						onChange={event => setResponsavel(event.target.value)}
-						className='border-gray-300 border-2 rounded-md p-2 w-full'
-					/>
-				</label>
+			<div className='max-w-md mx-auto'>
+				<form>
+					<label className='block mb-4 mt-4'>
+						Responsável:
+						<input
+							type='text'
+							value={responsavel}
+							onChange={event => setResponsavel(event.target.value)}
+							className='border-gray-300 border-2 rounded-md p-2 w-full'
+						/>
+					</label>
+				</form>
 				{serviceSelected && (
 					<div className='border border-gray-200 rounded-md p-2 mt-2'>
 						<div className='grid grid-cols-3 gap-4'>
@@ -160,18 +185,18 @@ export default function Services() {
 						</div>
 					</div>
 				)}
-			</form>
-			<button
-				onClick={updateServiceDataToLocalStorage}
-				className={`bg-green text-white font-semibold py-2 px-4 rounded-md mt-4 ${
-					responsavel && serviceSelected
-						? "cursor-pointer hover:bg-blue-600"
-						: "cursor-not-allowed opacity-50"
-				}`}
-				disabled={!responsavel}
-			>
-				Iniciar serviço
-			</button>
+				<button
+					onClick={updateServiceDataToLocalStorage}
+					className={`bg-green  w-full text-white font-semibold py-2 px-4 rounded-md mt-4 ${
+						responsavel && serviceSelected
+							? "cursor-pointer hover:bg-blue-600"
+							: "cursor-not-allowed opacity-50"
+					}`}
+					disabled={!responsavel}
+				>
+					Iniciar serviço
+				</button>
+			</div>
 		</div>
 	);
 }

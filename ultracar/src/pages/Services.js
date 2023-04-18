@@ -11,7 +11,7 @@ export default function Services() {
 
 	const collaborators = Array.from(new Set(storedData.map(data => data.responsavel)));
 
-	const filteredData =
+	const filteredDataByCollaborators =
 		collaboratorsSelected !== ""
 			? storedData.filter(data => data.responsavel === collaboratorsSelected)
 			: storedData;
@@ -39,9 +39,8 @@ export default function Services() {
 
 	const endService = placa => {
 		const storedData = JSON.parse(localStorage.getItem("services")) || [];
-		alert('serviço finalizado')
-	
-		
+		alert("serviço finalizado");
+
 		const updatedData = storedData.map(service => {
 			if (service.placa === placa) {
 				const date = new Date();
@@ -56,8 +55,6 @@ export default function Services() {
 				};
 			}
 			return service;
-			
-			
 		});
 
 		localStorage.setItem("services", JSON.stringify(updatedData));
@@ -90,7 +87,7 @@ export default function Services() {
 			</div>
 
 			<div className='mx-10'>
-				{filteredData.length > 0 && (
+				{filteredDataByCollaborators.length > 0 && (
 					<div className=' overflow-x-auto justify-center'>
 						<table className='md:table-fixed'>
 							<thead>
@@ -108,7 +105,7 @@ export default function Services() {
 								</tr>
 							</thead>
 							<tbody>
-								{filteredData.map((data, index) => (
+								{filteredDataByCollaborators.map((data, index) => (
 									<tr key={index}>
 										<td className='border border-gray px-4 py-2 text-center whitespace-nowrap'>
 											{data.cliente}

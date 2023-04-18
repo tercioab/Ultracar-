@@ -19,7 +19,7 @@ export default function StartService() {
 
 	const updateServiceDataToLocalStorage = () => {
 		const storedData = JSON.parse(localStorage.getItem("services")) || [];
-          const plate = localStorage.getItem("plate")
+        const plate = localStorage.getItem("plate")
 		const updatedData = storedData.map(service => {
 			if (service.placa === plate) {
 				return {

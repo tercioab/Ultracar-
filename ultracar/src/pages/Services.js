@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 export default function Services() {
 	const [responsavel, setResponsavel] = useState("");
 	const [serviceSelected, setServiceSelected] = useState("");
-  const [colaboradorSelecionado, setColaboradorSelecionado] = useState("");
-  let navigate = useNavigate();
+	const [colaboradorSelecionado, setColaboradorSelecionado] = useState("");
+	let navigate = useNavigate();
 
 	const storedData = JSON.parse(localStorage.getItem("services")) || [];
 
@@ -31,27 +31,36 @@ export default function Services() {
 			}
 			return service;
 		});
-    localStorage.setItem("services", JSON.stringify(updatedData));
-  
-    navigate("/iniciar-servico");
-  };
-  
-  const endService = placa => {
-    const storedData = JSON.parse(localStorage.getItem("services")) || [];
-	
-		const updatedData = storedData.filter(service => {
+		localStorage.setItem("services", JSON.stringify(updatedData));
+
+		navigate("/iniciar-servico");
+	};
+
+	const endService = placa => {
+		const storedData = JSON.parse(localStorage.getItem("services")) || [];
+
+		const updatedData = storedData.map(service => {
 			if (service.placa === placa) {
-				service.status = "Finalizado";
-				return service;
+				const date = new Date();
+				const formattedDate = `${date.getDate()}:${
+					date.getMonth() + 1
+				}:${date.getFullYear()}  H${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+
+				return {
+					...service,
+					status: "Finalizado",
+					data_termino: formattedDate,
+				};
 			}
 			return service;
 		});
-    localStorage.setItem("services", JSON.stringify(updatedData));
-  }
+
+		localStorage.setItem("services", JSON.stringify(updatedData));
+	};
 
 	const selectService = placa => {
-    const service = storedData.find(data => data.placa === placa);
-    localStorage.setItem("plate", placa )
+		const service = storedData.find(data => data.placa === placa);
+		localStorage.setItem("plate", placa);
 		setServiceSelected(service);
 	};
 
@@ -78,10 +87,11 @@ export default function Services() {
 							<th className='w-1/4 py-2'>Cliente</th>
 							<th className='w-1/4 py-2'>Responsável</th>
 							<th className='w-1/4 py-2'>Placa</th>
-              <th className='w-1/4 py-2'>Modelo</th>
-              <th className='w-1/4 py-2'>status</th>
-              <th className='w-1/4 py-2'>Valor das peças</th>
-							<th className='w-1/4 py-2'>Data</th>
+							<th className='w-1/4 py-2'>Modelo</th>
+							<th className='w-1/4 py-2'>status</th>
+							<th className='w-1/4 py-2'>Valor das peças</th>
+							<th className='w-1/4 py-2'>Data inicio</th>
+							<th className='w-1/4 py-2'>Data termino</th>
 							<th className='w-1/4 py-2'></th>
 						</tr>
 					</thead>
@@ -91,10 +101,13 @@ export default function Services() {
 								<td className='border py-2'>{data.cliente}</td>
 								<td className='border py-2'>{data.responsavel}</td>
 								<td className='border py-2'>{data.placa}</td>
-                <td className='border py-2'>{data.modelo}</td>
-                <td className='border py-2'>{data.status}</td>
-                <td className='border py-2'>{`${data.valor_total ? '$'+data.valor_total : ''}`}</td>
+								<td className='border py-2'>{data.modelo}</td>
+								<td className='border py-2'>{data.status}</td>
+								<td className='border py-2'>{`${
+									data.valor_total ? "$" + data.valor_total : ""
+								}`}</td>
 								<td className='border py-2'>{data.data_inicio}</td>
+								<td className='border py-2'>{data.data_termino}</td>
 								<button
 									className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full ${
 										!data.data_inicio
@@ -104,8 +117,8 @@ export default function Services() {
 									onClick={() => selectService(data.placa)}
 								>
 									Selecionar Serviço
-                </button>
-                <button
+								</button>
+								<button
 									className={`bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full`}
 									onClick={() => endService(data.placa)}
 								>

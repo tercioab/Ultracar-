@@ -1,0 +1,83 @@
+[
+    {
+      "pice": "Bateria",
+      "price": 350.00
+    },
+    {
+      "pice": "Pneu",
+      "price": 450.00
+    },
+    {
+      "pice": "Pastilha de Freio",
+      "price": 80.00
+    },
+    {
+      "pice": "Disco de Freio",
+      "price": 200.00
+    },
+    {
+      "pice": "Amortecedor",
+      "price": 380.00
+    },
+    {
+      "pice": "Vela",
+      "price": 35.00
+    },
+    {
+      "pice": "Filtro de Ar",
+      "price": 45.00
+    },
+    {
+      "pice": "Filtro de Óleo",
+      "price": 30.00
+    },
+    {
+      "pice": "Correia Dentada",
+      "price": 120.00
+    },
+    {
+      "pice": "Turbina",
+      "price": 1200.00
+    },
+    {
+      "pice": "Radiador",
+      "price": 280.00
+    },
+    {
+      "pice": "Sensor de Temperatura",
+      "price": 50.00
+    },
+    {
+      "pice": "Alternador",
+      "price": 450.00
+    },
+    {
+      "pice": "Motor de Arranque",
+      "price": 280.00
+    },
+    {
+      "pice": "Cabo de Vela",
+      "price": 50.00
+    },
+    {
+      "pice": "Sonda Lambda",
+      "price": 150.00
+    },
+    {
+      "pice": "Compressor de Ar Condicionado",
+      "price": 950.00
+    },
+    {
+      "pice": "Mangueira de Arrefecimento",
+      "price": 70.00
+    },
+    {
+      "pice": "Cilindro Mestre de Freio",
+      "price": 280.00
+    },
+    {
+      "pice": "Bomba de Combustível",
+      "price": 320.00
+    }
+  ]
+  

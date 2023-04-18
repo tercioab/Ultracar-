@@ -48,7 +48,7 @@ export default function RegisterClient() {
 					<form onSubmit={handleFormSubmit}>
 						<div className='mb-4'>
 							<label htmlFor='name' className='block font-bold text-gray-700 mb-2'>
-								Name:
+								Nome:
 							</label>
 							<input
 								type='text'
@@ -62,7 +62,7 @@ export default function RegisterClient() {
 
 						<div className='mb-4'>
 							<label htmlFor='plate' className='block font-bold text-gray-700 mb-2'>
-								Plate:
+								Placa:
 							</label>
 							<input
 								type='text'
@@ -76,7 +76,7 @@ export default function RegisterClient() {
 
 						<div className='mb-4'>
 							<label htmlFor='model' className='block font-bold text-gray-700 mb-2'>
-								Model:
+								Modelo:
 							</label>
 							<input
 								type='text'

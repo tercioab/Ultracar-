@@ -58,7 +58,7 @@ export default function QrCodeScanner() {
 			
 			<div
 				className='relative bg-blue-2  p-20  border-4 border-blue-1'
-				style={{ width: "400px", height: "400px" }}
+				style={{ width: "220px", height: "220px" }}
 			>
 				<video
 					id='qr-video'

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import generateDate from "../Utils/GenerateData";
 
 export default function Services() {
 	const [responsibleForService, setResponsibleForService] = useState("");
@@ -18,15 +19,10 @@ export default function Services() {
 
 	const updateServiceDataToLocalStorage = () => {
 		const storedData = JSON.parse(localStorage.getItem("services")) || [];
-		const date = new Date();
-		const formattedDate = `${date.getDate()}:${
-			date.getMonth() + 1
-		}:${date.getFullYear()}  H${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-
 		const updatedData = storedData.filter(service => {
 			if (service.placa === serviceSelected.placa) {
 				service.responsavel = responsibleForService;
-				service.data_inicio = formattedDate;
+				service.data_inicio = generateDate();
 				service.status = "Em andamento";
 				return service;
 			}
@@ -35,13 +31,6 @@ export default function Services() {
 		localStorage.setItem("services", JSON.stringify(updatedData));
 
 		navigate("/iniciar-servico");
-	};
-
-	const generateDate = () => {
-		const date = new Date();
-		return `${date.getDate()}:${
-			date.getMonth() + 1
-		}:${date.getFullYear()}  H${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
 	};
 
 	const endService = placa => {
@@ -58,7 +47,6 @@ export default function Services() {
 			}
 			return service;
 		});
-
 		localStorage.setItem("services", JSON.stringify(updatedData));
 	};
 

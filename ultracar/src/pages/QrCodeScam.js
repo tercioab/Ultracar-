@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import QrScanner from "qr-scanner";
+import generateDate from "../Utils/GenerateData";
 
 export default function QrCodeScanner() {
 	const [result, setResult] = useState(null);
 	const videoRef = useRef(null);
-	const [
-		responsibleForService, setResponsibleForService] = useState("");
+	const [responsibleForService, setResponsibleForService] = useState("");
 
 	let navigate = useNavigate();
 
@@ -28,15 +28,12 @@ export default function QrCodeScanner() {
 
 	const updateServiceDataToLocalStorage = () => {
 		const storedData = JSON.parse(localStorage.getItem("services")) || [];
-		const date = new Date();
-		const formattedDate = `${date.getDate()}:${
-			date.getMonth() + 1
-		}:${date.getFullYear()}  H${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+		
 		const updatedData = storedData.filter(service => {
 			if (service.placa === result.placa) {
 				service.responsavel = 
 				responsibleForService;
-				service.data_inicio = formattedDate;
+				service.data_inicio = generateDate();
 				service.status = "Em andamento";
 				return service;
 			}

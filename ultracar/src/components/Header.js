@@ -43,6 +43,9 @@ export default function Header() {
 					<a href='/services' className='text-sm font-semibold leading-6 text-blue-1'>
 						Serviços
 					</a>
+					<a href='/rules' className='text-sm font-semibold leading-6 text-blue-1'>
+						Regras
+					</a>
 				</Popover.Group>
 			</nav>
 			<Dialog
@@ -75,21 +78,27 @@ export default function Header() {
 							<div className='space-y-2 py-6'>
 								<a
 									href='/register-client'
-									className='-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50'
+									className='-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-blue-1 hover:bg-gray-50'
 								>
 									Registrar Cliente
 								</a>
 								<a
 									href='/qr-scanner'
-									className='-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50'
+									className='-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-blue-1 hover:bg-gray-50'
 								>
 									Scanner
 								</a>
 								<a
 									href='/services'
-									className='-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50'
+									className='-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-blue-1 hover:bg-gray-50'
 								>
 									Serviços
+								</a>
+								<a
+									href='/rules'
+									className='-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-blue-1 hover:bg-gray-50'
+								>
+									Regras
 								</a>
 							</div>
 						</div>

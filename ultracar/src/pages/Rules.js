@@ -47,8 +47,12 @@ export default function Rules() {
 			<p class='mb-8'>
 				Esperamos que este manual de instruções tenha ajudado você a entender como o
 				aplicativo de oficina funciona. Se você tiver alguma dúvida ou precisar de ajuda
-				adicional, não hesite em entrar em contato por <a className="text-blue-2" href="https://www.linkedin.com/in/walthercio-almeida/"> aqui</a>. Obrigado
-				por escolher nosso aplicativo!
+				adicional, não hesite em entrar em contato por{" "}
+				<a className='text-blue-2' href='https://www.linkedin.com/in/walthercio-almeida/'>
+					{" "}
+					aqui
+				</a>
+				. Obrigado por escolher nosso aplicativo!
 			</p>
 		</div>
 	);

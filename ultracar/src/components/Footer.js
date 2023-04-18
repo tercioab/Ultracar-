@@ -1,6 +1,6 @@
 export default function Footer() {
 	return (
-		<footer class='bg- rounded-lg shadow dark:bg-gray-900 m-4 border-t-2 border-blue-2 '>
+		<footer class='bg- rounded-lg  dark:bg-gray-900 m-4 border-t-2 border-blue-2'>
             <div class='w-full max-w-screen-xl mx-auto p-4 md:py-8 '>
             <a href="https://ultracar.com.br/sistema-gestao-oficina-mecanica/programa-gerenciamento-oficina-mecanica/" target="_blank" rel="noreferrer" class="flex items-center mb-4 sm:mb-0">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuAViRjVdVHqHCxGRWvWIRl28OgsdJ6BrQT2IANlgn6Q&s" class="h-8 mr-3" alt="Ultracar logo" />

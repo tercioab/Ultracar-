@@ -11,7 +11,7 @@ export default function Services() {
 
 	const colaboradores = Array.from(new Set(storedData.map(data => data.responsavel)));
 
-	const dadosFiltrados =
+	const filteredData =
 		colaboradorSelecionado !== ""
 			? storedData.filter(data => data.responsavel === colaboradorSelecionado)
 			: storedData;
@@ -86,7 +86,7 @@ export default function Services() {
 			</div>
 
 			<div className='mx-10'>
-				{dadosFiltrados.length > 0 && (
+				{filteredData.length > 0 && (
 					<div className=' overflow-x-auto justify-center'>
 						<table className='md:table-fixed'>
 							<thead>
@@ -104,7 +104,7 @@ export default function Services() {
 								</tr>
 							</thead>
 							<tbody>
-								{dadosFiltrados.map((data, index) => (
+								{filteredData.map((data, index) => (
 									<tr key={index}>
 										<td className='border border-gray px-4 py-2 text-center whitespace-nowrap'>
 											{data.cliente}

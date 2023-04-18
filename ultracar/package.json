@@ -8,6 +8,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "eslint-config-trybe-frontend": "^1.7.0",
     "html-pdf": "^3.0.1",
     "html-to-image": "^1.11.11",
     "jspdf": "^2.5.1",

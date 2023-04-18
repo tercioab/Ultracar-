@@ -37,21 +37,23 @@ export default function Services() {
 		navigate("/iniciar-servico");
 	};
 
+	const generateDate = () => {
+		const date = new Date();
+		return `${date.getDate()}:${
+			date.getMonth() + 1
+		}:${date.getFullYear()}  H${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+	};
+
 	const endService = placa => {
 		const storedData = JSON.parse(localStorage.getItem("services")) || [];
 		alert("serviço finalizado");
 
 		const updatedData = storedData.map(service => {
 			if (service.placa === placa) {
-				const date = new Date();
-				const formattedDate = `${date.getDate()}:${
-					date.getMonth() + 1
-				}:${date.getFullYear()}  H${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-
 				return {
 					...service,
 					status: "Finalizado",
-					data_termino: formattedDate,
+					data_termino: generateDate()
 				};
 			}
 			return service;
@@ -133,7 +135,9 @@ export default function Services() {
 										</td>
 										<td className='border border-gray px-4 py-2 text-center whitespace-nowrap'>
 											<button
-												className={`bg-green hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full ${ data.data_inicio && "cursor-not-allowed opacity-50" }`}
+												className={`bg-green hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full ${
+													data.data_inicio && "cursor-not-allowed opacity-50"
+												}`}
 												onClick={() => selectService(data.placa)}
 											>
 												Selecionar Serviço
@@ -142,7 +146,8 @@ export default function Services() {
 										<td className='border border-gray px-4 py-2 text-center'>
 											<button
 												className={`bg-red  text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full ${
-													data.data_termino && "cursor-not-allowed opacity-50" }`}
+													data.data_termino && "cursor-not-allowed opacity-50"
+												}`}
 												onClick={() => endService(data.placa)}
 											>
 												Finalizar Serviço

@@ -2,18 +2,18 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Services() {
-	const [responsavel, setResponsavel] = useState("");
+	const [responsibleForService, setResponsibleForService] = useState("");
 	const [serviceSelected, setServiceSelected] = useState("");
-	const [colaboradorSelecionado, setColaboradorSelecionado] = useState("");
+	const [collaboratorsSelected, setCollaboratorsSelected] = useState("");
 	let navigate = useNavigate();
 
 	const storedData = JSON.parse(localStorage.getItem("services")) || [];
 
-	const colaboradores = Array.from(new Set(storedData.map(data => data.responsavel)));
+	const collaborators = Array.from(new Set(storedData.map(data => data.responsavel)));
 
 	const filteredData =
-		colaboradorSelecionado !== ""
-			? storedData.filter(data => data.responsavel === colaboradorSelecionado)
+		collaboratorsSelected !== ""
+			? storedData.filter(data => data.responsavel === collaboratorsSelected)
 			: storedData;
 
 	const updateServiceDataToLocalStorage = () => {
@@ -25,7 +25,7 @@ export default function Services() {
 
 		const updatedData = storedData.filter(service => {
 			if (service.placa === serviceSelected.placa) {
-				service.responsavel = responsavel;
+				service.responsavel = responsibleForService;
 				service.data_inicio = formattedDate;
 				service.status = "Em andamento";
 				return service;
@@ -39,7 +39,9 @@ export default function Services() {
 
 	const endService = placa => {
 		const storedData = JSON.parse(localStorage.getItem("services")) || [];
-
+		alert('serviço finalizado')
+	
+		
 		const updatedData = storedData.map(service => {
 			if (service.placa === placa) {
 				const date = new Date();
@@ -54,6 +56,8 @@ export default function Services() {
 				};
 			}
 			return service;
+			
+			
 		});
 
 		localStorage.setItem("services", JSON.stringify(updatedData));
@@ -72,11 +76,11 @@ export default function Services() {
 					<h2 className='text-lg font-bold mb-4'>Selecione um colaborador</h2>
 					<select
 						className='w-full md:w-48 rounded-md p-2 mb-4 text-sm font-medium text-slate-900'
-						value={colaboradorSelecionado}
-						onChange={event => setColaboradorSelecionado(event.target.value)}
+						value={collaboratorsSelected}
+						onChange={event => setCollaboratorsSelected(event.target.value)}
 					>
 						<option value=''>Todos</option>
-						{colaboradores.map(colaborador => (
+						{collaborators.map(colaborador => (
 							<option key={colaborador} value={colaborador}>
 								{colaborador}
 							</option>
@@ -163,8 +167,8 @@ export default function Services() {
 						Responsável:
 						<input
 							type='text'
-							value={responsavel}
-							onChange={event => setResponsavel(event.target.value)}
+							value={responsibleForService}
+							onChange={event => setResponsibleForService(event.target.value)}
 							className='border-gray-300 border-2 rounded-md p-2 w-full'
 						/>
 					</label>
@@ -188,11 +192,11 @@ export default function Services() {
 				<button
 					onClick={updateServiceDataToLocalStorage}
 					className={`bg-green  w-full  mb-16 text-white font-semibold py-2 px-4 rounded-md mt-4 ${
-						responsavel && serviceSelected
+						responsibleForService && serviceSelected
 							? "cursor-pointer hover:bg-blue-600"
 							: "cursor-not-allowed opacity-50"
 					}`}
-					disabled={!responsavel}
+					disabled={!responsibleForService}
 				>
 					Iniciar serviço
 				</button>

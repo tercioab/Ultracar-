@@ -19,7 +19,7 @@ export default function Header() {
 							alt='ultracar logo'
 						/>
 					</a>
-					<p className='text-lg font-soft-bold'>Ultracar Mechanicidentifier</p>
+					<p className='text-lg font-soft-bold'>Ultracar QRMechanicr</p>
 				</div>
 				<div className='flex lg:hidden'>
 					<button

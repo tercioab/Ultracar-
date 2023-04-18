@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 export default function StartService() {
 	const [totalValue, settotalValue] = useState(0);
 	const [selectedPices, setSelectedPices] = useState([]);
-    let navigate = useNavigate();
+	let navigate = useNavigate();
+
 	function addPice(pice) {
 		setSelectedPices([...selectedPices, pice]);
 		settotalValue(prevtotalValue => prevtotalValue + pice.price);
@@ -19,7 +20,7 @@ export default function StartService() {
 
 	const updateServiceDataToLocalStorage = () => {
 		const storedData = JSON.parse(localStorage.getItem("services")) || [];
-        const plate = localStorage.getItem("plate")
+		const plate = localStorage.getItem("plate");
 		const updatedData = storedData.map(service => {
 			if (service.placa === plate) {
 				return {
@@ -30,8 +31,8 @@ export default function StartService() {
 			return service;
 		});
 
-        localStorage.setItem("services", JSON.stringify(updatedData));
-        navigate("/services");
+		localStorage.setItem("services", JSON.stringify(updatedData));
+		navigate("/services");
 	};
 
 	return (
@@ -73,12 +74,16 @@ export default function StartService() {
 						</tr>
 					))}
 				</tbody>
-            </table>
-            <button className='bg-green hover:bg-red text-white font-bold py-2 px-4 rounded mt-4' onClick={updateServiceDataToLocalStorage}>iniciar serviço</button>
+			</table>
+			<button
+				className='bg-green hover:bg-red text-white font-bold py-2 px-4 rounded mt-4'
+				onClick={updateServiceDataToLocalStorage}
+			>
+				iniciar serviço
+			</button>
 			<p className='text-xl font-bold mt-4'>
 				Valor total: R$ {Number(totalValue).toFixed(2)}
 			</p>
-			
 		</div>
 	);
 }

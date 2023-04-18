@@ -5,7 +5,8 @@ import QrScanner from "qr-scanner";
 export default function QrCodeScanner() {
 	const [result, setResult] = useState(null);
 	const videoRef = useRef(null);
-	const [responsavel, setResponsavel] = useState("");
+	const [
+		responsibleForService, setResponsibleForService] = useState("");
 
 	let navigate = useNavigate();
 
@@ -33,7 +34,8 @@ export default function QrCodeScanner() {
 		}:${date.getFullYear()}  H${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
 		const updatedData = storedData.filter(service => {
 			if (service.placa === result.placa) {
-				service.responsavel = responsavel;
+				service.responsavel = 
+				responsibleForService;
 				service.data_inicio = formattedDate;
 				service.status = "Em andamento";
 				return service;
@@ -74,8 +76,8 @@ export default function QrCodeScanner() {
 						Responsável:
 						<input
 							type='text'
-							value={responsavel}
-							onChange={event => setResponsavel(event.target.value)}
+							value={responsibleForService}
+							onChange={event => setResponsibleForService(event.target.value)}
 							className='border-gray-300 border-2 rounded-md p-2 w-full'
 						/>
 					</label>
@@ -99,11 +101,11 @@ export default function QrCodeScanner() {
 						href='/register-client'
 						type='submit'
 						className={`bg-green text-white font-semibold py-2 px-4 rounded-md mt-4 ${
-							responsavel && result
+							responsibleForService && result
 								? "cursor-pointer hover:bg-blue-600"
 								: "cursor-not-allowed opacity-50"
 						}`}
-						disabled={!responsavel}
+						disabled={!responsibleForService}
 					>
 						Registrar Serviço
 					</button>

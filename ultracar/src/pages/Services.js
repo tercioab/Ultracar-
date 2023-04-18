@@ -133,11 +133,7 @@ export default function Services() {
 										</td>
 										<td className='border border-gray px-4 py-2 text-center whitespace-nowrap'>
 											<button
-												className={`bg-green hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full ${
-													!data.data_inicio
-														? "cursor-pointer hover:bg-blue-600"
-														: "cursor-not-allowed opacity-50"
-												}`}
+												className={`bg-green hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full ${ data.data_inicio && "cursor-not-allowed opacity-50" }`}
 												onClick={() => selectService(data.placa)}
 											>
 												Selecionar Serviço
@@ -145,7 +141,8 @@ export default function Services() {
 										</td>
 										<td className='border border-gray px-4 py-2 text-center'>
 											<button
-												className='bg-red hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full'
+												className={`bg-red  text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full ${
+													data.data_termino && "cursor-not-allowed opacity-50" }`}
 												onClick={() => endService(data.placa)}
 											>
 												Finalizar Serviço

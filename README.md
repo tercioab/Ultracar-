@@ -1,4 +1,4 @@
-# Ultracar  MechanicMate 🚗
+# Ultracar QRMechanicr 🚗
 
 ## Deploy 👨‍💻 
 https://ultracar-henna.vercel.app

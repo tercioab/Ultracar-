@@ -10,6 +10,7 @@ export default function QrCodeScanner() {
 
 	let navigate = useNavigate();
 
+	// escaneia o qr code
 	useEffect(() => {
 		QrScanner.hasCamera().then(hasCamera => {
 			if (!hasCamera) {

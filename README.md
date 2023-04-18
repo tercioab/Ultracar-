@@ -18,6 +18,9 @@ Digite o comando npm install para instalar as dependências necessárias.
 Em seguida, digite o comando npm start para iniciar o servidor de desenvolvimento.
 Abra o navegador e acesse http://localhost:3000 para visualizar o projeto em execução.
 
+## ATENÇÃO ⚠️⚠️⚠️
+A lógica por trás da utilização do QR code baseia-se no princípio de que o cliente irá imprimir o PDF e, em seguida, ler o código com o mesmo dispositivo que o gerou. Se o código for gerado em um dispositivo e lido em outro, não funcionará, pois os dados nesse primeiro momento ficam são salvos no local storage. Portanto, é importante que o cliente utilize o mesmo dispositivo para gerar e ler o QR code.
+
 ## O que foi utilizado no projeto
 
 ### Bibliotecas 📚

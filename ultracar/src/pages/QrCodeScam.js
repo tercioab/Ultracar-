@@ -53,7 +53,7 @@ export default function QrCodeScanner() {
 
 	return (
 		<div className='flex flex-col justify-center items-center h-screen'>
-			<h1 className='text-1xl font-bold mb-4'>Aponte a camera para o qr code</h1>
+			<h1 className='text-1xl mb-4'>APONTE A CÂMERA PARA O QR CODE</h1>
 
 			
 			<div

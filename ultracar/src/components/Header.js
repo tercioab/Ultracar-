@@ -43,8 +43,8 @@ export default function Header() {
 					<a href='/services' className='text-sm font-semibold leading-6 text-blue-1'>
 						Serviços
 					</a>
-					<a href='/rules' className='text-sm font-semibold leading-6 text-blue-1'>
-						Regras
+					<a href='/manual' className='text-sm font-semibold leading-6 text-blue-1'>
+						Manual
 					</a>
 				</Popover.Group>
 			</nav>
@@ -95,10 +95,10 @@ export default function Header() {
 									Serviços
 								</a>
 								<a
-									href='/rules'
+									href='/manual'
 									className='-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-blue-1 hover:bg-gray-50'
 								>
-									Regras
+									Manual
 								</a>
 							</div>
 						</div>

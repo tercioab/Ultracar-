@@ -1,8 +1,8 @@
-export default function Rules() {
+export default function Manual() {
 	return (
 		<div class='bg-gray-2 p-8 mx-auto my-8 rounded-lg w-3/4'>
 			<h1 class='text-2xl font-bold mb-4'>
-				Bem-vindo ao manual de instruções para o seu aplicativo Ultracar QRMechanic !
+				Bem-vindo ao manual para o seu aplicativo Ultracar QRMechanic !
 			</h1>
 			<p class='mb-8'>
 				Este aplicativo foi desenvolvido para ajudar oficinas mecânicas a gerenciar seus

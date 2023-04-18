@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import RegisterClient from "./pages/RegisterClient";
 import QrCodeScanner from "./pages/QrCodeScam";
 import Services from "./pages/Services";
@@ -10,7 +10,8 @@ export default function App() {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path='/' element={<Layout />}>
+				<Route element={<Layout />}>
+				<Route path="/" element={<Navigate to="/register-client" />} />
 					<Route path='/register-client' element={<RegisterClient />} />
 					<Route path='/qr-scanner' element={<QrCodeScanner />} />
 					<Route path='/services' element={<Services />} />

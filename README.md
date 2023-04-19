@@ -72,7 +72,7 @@ Um dos pontos fortes do projeto para mim foi a implementação bem-sucedida das 
 
 Outro ponto que vale ressaltar foi a implementação da responsividade no projeto. O conhecimento em Tailwind me ajudou a desenvolver o estilo e a responsividade da aplicação de uma maneira muito rápida.
 
-## Pontos fracos 👎
+## Pontos fracos 😔
 
 Reconheço que um dos pontos fracos do projeto foi a falta de testes automatizados. Sei que testes são essenciais para garantir um código limpo e de qualidade, mas como não tenho muita experiência com TDD (algo que pretendo melhorar em minhas hard-skils), optei por focar mais na implementação das funcionalidades do projeto.
 

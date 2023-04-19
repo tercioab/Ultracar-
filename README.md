@@ -68,16 +68,13 @@ Baixar o Qr code creio que foi uma das partes mais complicadas do projeto, a bib
 
 ## Pontos fortes 🦾
 
-Um dos pontos fortes do projeto para mim foi a implementação bem-sucedida das funcionalidades de geração e leitura de QR code algo que eu nunca tinha visto sobre e para conseguir implementá-las, precisei estudar documentações e assistir aulas no YouTube, mas no final, fiquei muito satisfeito com o resultado.
+Um dos pontos fortes do projeto para mim foi a implementação bem-sucedida das funcionalidades de geração e leitura de QR code algo que eu nunca tinha visto sobre e foi bem diferente implementar, precisei ler algumas documentações e fazer pesquisas porem no final, fiquei muito satisfeito com o resultado, não é algo tão tecnico porem gostei muito de ter implementado
 
-Outro ponto que vale resaltar foi a implementação do Tailwind para estilizar o projeto, com ele conseguir implementar todo estilo do projeto enquanto desenvolvia garantindo um projeto responsivo.
+Outro ponto que vale ressaltar foi a implementação da responsividade no projeto. O conhecimento em Tailwind me ajudou a desenvolver o estilo e a responsividade da aplicação de uma maneira muito rápida.
 
 ## Pontos fracos 👎
 
 Reconheço que um dos pontos fracos do projeto foi a falta de testes automatizados. Sei que testes são essenciais para garantir um código limpo e de qualidade, mas como não tenho muita experiência com TDD (algo que pretendo melhorar em minhas hard-skils), optei por focar mais na implementação das funcionalidades do projeto.
-
-Além disso, devido ao tempo limitado, não separei adequadamente os componentes em seus respectivos diretórios, deixando muitos deles em uma única página. Isso é algo que gostaria de melhorar futuramente. (pretendo continuar desenvolvendo esse projeto mesmo depois da avaliação)
-
 
 ## Pontos para melhorar futuramente 🤝
 

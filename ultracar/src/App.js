@@ -4,7 +4,7 @@ import QrCodeScanner from "./pages/QrCodeScam";
 import Services from "./pages/Services";
 import StartService from "./pages/StartService";
 import Manual from "./pages/Manual";
-import Layout from "./components/layout";
+import Layout from "./components/layout/layout";
 
 export default function App() {
 	return (

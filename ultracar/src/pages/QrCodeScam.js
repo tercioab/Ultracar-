@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import QrScanner from "qr-scanner";
 import generateDate from "../Utils/GenerateData";
+import VehicleDetails from "../components/common/VehicleDetails";
 
 export default function QrCodeScanner() {
 	const [result, setResult] = useState(null);
@@ -66,6 +67,14 @@ export default function QrCodeScanner() {
 		updateServiceDataToLocalStorage();
 	};
 
+	function isButtonDisabled(dataStorageExist) {
+		if (dataStorageExist[0]?.status === "Em andamento" || !result) return false;
+		if (responsibleForService ) return true 
+		
+	}
+
+	console.log(isButtonDisabled(dataStorageExist));
+
 	return (
 		<div className='flex flex-col justify-center items-center h-screen'>
 			<h1 className='text-1xl mb-4'>APONTE A CÂMERA PARA O QR CODE</h1>
@@ -93,67 +102,26 @@ export default function QrCodeScanner() {
 							className='border-gray-300 border-2 rounded-md p-2 w-full'
 						/>
 					</label>
-					{(result || dataStorageExist[0].cliente) && (
-						<div className='border border-gray-200 rounded-md p-2 mt-2'>
-						{result && (
-							<>
-								<div className='grid grid-cols-3 gap-4'>
-									<div className='col-span-1 font-bold'>Cliente:</div>
-									<div className='col-span-2'>{result?.cliente}</div>
-								</div>
-								<div className='grid grid-cols-3 gap-4'>
-									<div className='col-span-1 font-bold'>Placa:</div>
-									<div className='col-span-2'>{result?.placa}</div>
-								</div>
-								<div className='grid grid-cols-3 gap-4'>
-									<div className='col-span-1 font-bold'>Modelo:</div>
-									<div className='col-span-2'>{result?.modelo}</div>
-								</div>
-							</>
-						)}
+					{(result || dataStorageExist[0]?.cliente) && (
+						<>
+							{result && !dataStorageExist[0]?.cliente && (
+								<VehicleDetails vehicle={result} />
+							)}
+							{dataStorageExist[0]?.cliente && (
+								<VehicleDetails vehicle={dataStorageExist[0]} />
+							)}
+						</>
+					)}
 
-						{dataStorageExist[0]?.cliente && (
-							<>
-								<div className='grid grid-cols-3 gap-4'>
-									<div className='col-span-1 font-bold'>Cliente:</div>
-									<div className='col-span-2'>{dataStorageExist[0].cliente}</div>
-								</div>
-								<div className='grid grid-cols-3 gap-4'>
-									<div className='col-span-1 font-bold'>Placa:</div>
-									<div className='col-span-2'>{dataStorageExist[0].placa}</div>
-								</div>
-								<div className='grid grid-cols-3 gap-4'>
-									<div className='col-span-1 font-bold'>Modelo:</div>
-									<div className='col-span-2'>{dataStorageExist[0].modelo}</div>
-								</div>
-								<div className='grid grid-cols-3 gap-4'>
-									<div className='col-span-1 font-bold'>Modelo:</div>
-									<div className='col-span-2'>{dataStorageExist[0].responsavel}</div>
-								</div>
-								<div className='grid grid-cols-3 gap-4'>
-									<div className='col-span-1 font-bold'>Modelo:</div>
-									<div className='col-span-2'>{dataStorageExist[0].data_inicio}</div>
-								</div>
-								<div className='grid grid-cols-3 gap-4'>
-									<div className='col-span-1 font-bold'>Modelo:</div>
-									<div className='col-span-2'>{dataStorageExist[0].status}</div>
-								</div>
-							</>
-						)}
-					</div>
-					) }
-					
 					<button
 						href='/register-client'
 						type='submit'
 						className={`bg-green text-white font-semibold py-2 px-4 rounded-md mt-4 ${
-							(!responsibleForService && !result) ||
-							(dataStorageExist[0]?.responsavel !== "aguardando colaborador" &&
-								dataStorageExist[0]?.responsavel !== undefined)
-								? "cursor-not-allowed opacity-50"
-								: "curso-pointer hover:bg-blue-600"
-						}`}
-						disabled={!responsibleForService}
+							!isButtonDisabled(dataStorageExist)
+							  ? "cursor-not-allowed opacity-50"
+							  : "cursor-pointer hover:bg-blue-600"
+						  }`}
+						disabled={!isButtonDisabled(dataStorageExist)}
 					>
 						Registrar Serviço
 					</button>

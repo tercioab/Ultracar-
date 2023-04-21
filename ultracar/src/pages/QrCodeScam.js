@@ -31,30 +31,37 @@ export default function QrCodeScanner() {
 	const updateServiceDataToLocalStorage = () => {
 		const storedData = JSON.parse(localStorage.getItem("services")) || [];
 
-		const updatedData = storedData.filter(service => {
-			if (service.placa === result.placa) {
-				service.responsavel = responsibleForService;
-				service.data_inicio = generateDate();
-				service.status = "Em andamento";
-				return service;
-			}
+		// Verifica se o serviço já existe
+		const existingServiceIndex = storedData.findIndex(
+			service => service.placa === result.placa,
+		);
 
-			return service;
-		});
+		// Atualiza ou cria um novo serviço
+		const serviceToUpdateOrCreate =
+			existingServiceIndex >= 0
+				? {
+						...storedData[existingServiceIndex],
+						responsavel: responsibleForService,
+						data_inicio: generateDate(),
+						status: "Em andamento",
+				  }
+				: {
+						cliente: result.cliente,
+						placa: result.placa,
+						modelo: result.modelo,
+						responsavel: responsibleForService,
+						data_inicio: generateDate(),
+						status: "Em andamento",
+				  };
 
-		if (storedData[0].placa !== result.placa) {
-			const newService = {
-				cliente: result.cliente,
-				placa: result.placa,
-				modelo: result.modelo,
-				responsavel: responsibleForService,
-				data_inicio: generateDate(),
-				status: "Em andamento",
-			};
-			updatedData.push(newService);
+		// Substitui ou adiciona o serviço no array de dados
+		if (existingServiceIndex >= 0) {
+			storedData.splice(existingServiceIndex, 1, serviceToUpdateOrCreate);
+		} else {
+			storedData.push(serviceToUpdateOrCreate);
 		}
 
-		localStorage.setItem("services", JSON.stringify(updatedData));
+		localStorage.setItem("services", JSON.stringify(storedData));
 	};
 
 	const storedData = JSON.parse(localStorage.getItem("services")) || [];
@@ -69,11 +76,8 @@ export default function QrCodeScanner() {
 
 	function isButtonDisabled(dataStorageExist) {
 		if (dataStorageExist[0]?.status === "Em andamento" || !result) return false;
-		if (responsibleForService ) return true 
-		
+		if (responsibleForService) return true;
 	}
-
-	console.log(isButtonDisabled(dataStorageExist));
 
 	return (
 		<div className='flex flex-col justify-center items-center h-screen'>
@@ -118,9 +122,9 @@ export default function QrCodeScanner() {
 						type='submit'
 						className={`bg-green text-white font-semibold py-2 px-4 rounded-md mt-4 ${
 							!isButtonDisabled(dataStorageExist)
-							  ? "cursor-not-allowed opacity-50"
-							  : "cursor-pointer hover:bg-blue-600"
-						  }`}
+								? "cursor-not-allowed opacity-50"
+								: "cursor-pointer hover:bg-blue-600"
+						}`}
 						disabled={!isButtonDisabled(dataStorageExist)}
 					>
 						Registrar Serviço

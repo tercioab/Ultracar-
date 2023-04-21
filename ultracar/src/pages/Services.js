@@ -10,7 +10,7 @@ export default function Services() {
 
 	const storedData = JSON.parse(localStorage.getItem("services")) || [];
 
-	const collaborators = Array.from(new Set(storedData.map(data => data.responsavel)));
+	const collaborators = Array.from(new Set(storedData.map(({responsavel}) => responsavel)));
 
 	const filteredDataByCollaborators =
 		collaboratorsSelected !== ""

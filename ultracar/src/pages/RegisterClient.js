@@ -103,13 +103,13 @@ export default function RegisterClient() {
 					</button>
 				</div>
 				{qrCodeData && (
-					<div ref={qrCodeRef} className='mt-8 w-full md:w-1/2 lg:w-1/3'>
-						<div  className='flex flex-col items-center'>
+					<div className='mt-8 w-full md:w-1/2 lg:w-1/3'>
+						<div ref={qrCodeRef} className='flex flex-col'>
 							<QRCode value={qrCodeData} size={256} id='qr-code' className='mb-4' />
-							<div className='flex flex-col items-center'>
+							
 								<span className='text-lg font-bold mb-2'>Placa: {plate}</span>
 								<span className='text-lg font-bold mb-2'>Modelo: {model}</span>
-							</div>
+							
 						</div>
 					</div>
 				)}

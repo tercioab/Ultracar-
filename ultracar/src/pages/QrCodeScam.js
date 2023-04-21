@@ -56,6 +56,9 @@ export default function QrCodeScanner() {
 		localStorage.setItem("services", JSON.stringify(updatedData));
 	};
 
+	const storedData = JSON.parse(localStorage.getItem("services")) || [];
+	const dataStorageExist = storedData.filter(service => service.placa === result?.placa);
+
 	const handleSubmit = e => {
 		e.preventDefault();
 		localStorage.setItem("plate", result.placa);
@@ -90,29 +93,65 @@ export default function QrCodeScanner() {
 							className='border-gray-300 border-2 rounded-md p-2 w-full'
 						/>
 					</label>
-					{result && (
+					{(result || dataStorageExist[0].cliente) && (
 						<div className='border border-gray-200 rounded-md p-2 mt-2'>
-							<div className='grid grid-cols-3 gap-4'>
-								<div className='col-span-1 font-bold'>Cliente:</div>
-								<div className='col-span-2'>{result?.cliente}</div>
-							</div>
-							<div className='grid grid-cols-3 gap-4'>
-								<div className='col-span-1 font-bold'>Placa:</div>
-								<div className='col-span-2'>{result?.placa}</div>
-							</div>
-							<div className='grid grid-cols-3 gap-4'>
-								<div className='col-span-1 font-bold'>Modelo:</div>
-								<div className='col-span-2'>{result?.modelo}</div>
-							</div>
-						</div>
-					)}
+						{result && (
+							<>
+								<div className='grid grid-cols-3 gap-4'>
+									<div className='col-span-1 font-bold'>Cliente:</div>
+									<div className='col-span-2'>{result?.cliente}</div>
+								</div>
+								<div className='grid grid-cols-3 gap-4'>
+									<div className='col-span-1 font-bold'>Placa:</div>
+									<div className='col-span-2'>{result?.placa}</div>
+								</div>
+								<div className='grid grid-cols-3 gap-4'>
+									<div className='col-span-1 font-bold'>Modelo:</div>
+									<div className='col-span-2'>{result?.modelo}</div>
+								</div>
+							</>
+						)}
+
+						{dataStorageExist[0]?.cliente && (
+							<>
+								<div className='grid grid-cols-3 gap-4'>
+									<div className='col-span-1 font-bold'>Cliente:</div>
+									<div className='col-span-2'>{dataStorageExist[0].cliente}</div>
+								</div>
+								<div className='grid grid-cols-3 gap-4'>
+									<div className='col-span-1 font-bold'>Placa:</div>
+									<div className='col-span-2'>{dataStorageExist[0].placa}</div>
+								</div>
+								<div className='grid grid-cols-3 gap-4'>
+									<div className='col-span-1 font-bold'>Modelo:</div>
+									<div className='col-span-2'>{dataStorageExist[0].modelo}</div>
+								</div>
+								<div className='grid grid-cols-3 gap-4'>
+									<div className='col-span-1 font-bold'>Modelo:</div>
+									<div className='col-span-2'>{dataStorageExist[0].responsavel}</div>
+								</div>
+								<div className='grid grid-cols-3 gap-4'>
+									<div className='col-span-1 font-bold'>Modelo:</div>
+									<div className='col-span-2'>{dataStorageExist[0].data_inicio}</div>
+								</div>
+								<div className='grid grid-cols-3 gap-4'>
+									<div className='col-span-1 font-bold'>Modelo:</div>
+									<div className='col-span-2'>{dataStorageExist[0].status}</div>
+								</div>
+							</>
+						)}
+					</div>
+					) }
+					
 					<button
 						href='/register-client'
 						type='submit'
 						className={`bg-green text-white font-semibold py-2 px-4 rounded-md mt-4 ${
-							responsibleForService && result
-								? "cursor-pointer hover:bg-blue-600"
-								: "cursor-not-allowed opacity-50"
+							(!responsibleForService && !result) ||
+							(dataStorageExist[0]?.responsavel !== "aguardando colaborador" &&
+								dataStorageExist[0]?.responsavel !== undefined)
+								? "cursor-not-allowed opacity-50"
+								: "curso-pointer hover:bg-blue-600"
 						}`}
 						disabled={!responsibleForService}
 					>

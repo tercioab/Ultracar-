@@ -31,15 +31,14 @@ export default function QrCodeScanner() {
 	const updateServiceDataToLocalStorage = () => {
 		const storedData = JSON.parse(localStorage.getItem("services")) || [];
 
-		// Verifica se o serviço já existe
 		const existingServiceIndex = storedData.findIndex(
 			service => service.placa === result.placa,
 		);
 
-		// Atualiza ou cria um novo serviço
+		console.log(storedData, "ddd")
 		const serviceToUpdateOrCreate =
 			existingServiceIndex >= 0
-				? {
+				? { 
 						...storedData[existingServiceIndex],
 						responsavel: responsibleForService,
 						data_inicio: generateDate(),
@@ -54,7 +53,7 @@ export default function QrCodeScanner() {
 						status: "Em andamento",
 				  };
 
-		// Substitui ou adiciona o serviço no array de dados
+
 		if (existingServiceIndex >= 0) {
 			storedData.splice(existingServiceIndex, 1, serviceToUpdateOrCreate);
 		} else {

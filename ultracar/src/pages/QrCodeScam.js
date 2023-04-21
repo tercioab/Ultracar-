@@ -29,17 +29,29 @@ export default function QrCodeScanner() {
 
 	const updateServiceDataToLocalStorage = () => {
 		const storedData = JSON.parse(localStorage.getItem("services")) || [];
-		
+
 		const updatedData = storedData.filter(service => {
 			if (service.placa === result.placa) {
-				service.responsavel = 
-				responsibleForService;
+				service.responsavel = responsibleForService;
 				service.data_inicio = generateDate();
 				service.status = "Em andamento";
 				return service;
 			}
+
 			return service;
 		});
+
+		if (storedData[0].placa !== result.placa) {
+			const newService = {
+				cliente: result.cliente,
+				placa: result.placa,
+				modelo: result.modelo,
+				responsavel: responsibleForService,
+				data_inicio: generateDate(),
+				status: "Em andamento",
+			};
+			updatedData.push(newService);
+		}
 
 		localStorage.setItem("services", JSON.stringify(updatedData));
 	};
@@ -55,7 +67,6 @@ export default function QrCodeScanner() {
 		<div className='flex flex-col justify-center items-center h-screen'>
 			<h1 className='text-1xl mb-4'>APONTE A CÂMERA PARA O QR CODE</h1>
 
-			
 			<div
 				className='relative bg-blue-2  p-20  border-4 border-blue-1'
 				style={{ width: "220px", height: "220px" }}

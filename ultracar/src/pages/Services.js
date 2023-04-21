@@ -76,10 +76,10 @@ export default function Services() {
 				</div>
 			</div>
 
-			<div className='mx-10'>
+			<div className='container mx-auto'>
 				{filteredDataByCollaborators.length > 0 && (
-					<div className=' overflow-x-auto justify-center'>
-						<table className='md:table-fixed'>
+					<div className=' overflow-x-auto justify-center '>
+						<table className='md:table-fixed '>
 							<thead>
 								<tr className='bg-gray'>
 									<th className='px-4 py-2'>Cliente</th>

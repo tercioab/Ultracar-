@@ -39,7 +39,7 @@ export default function Services() {
 		setServiceSelected(service);
 	};
 
-	const endService = placa => {
+	const endServiceOnStorage = placa => {
 		const updatedData = storedData.map(service => {
 			if (service.placa === placa && service.data_inicio) {
 				return {
@@ -153,7 +153,7 @@ export default function Services() {
 													data.data_termino && "cursor-not-allowed opacity-50"
 													}`}
 													disabled={data.data_termino}
-												onClick={() => endService(data.placa)}
+												onClick={() => endServiceOnStorage(data.placa)}
 											>
 												Finalizar
 											</button>

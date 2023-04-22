@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import QrScanner from "qr-scanner";
 import generateDate from "../Utils/GenerateData";
 import VehicleDetails from "../components/common/VehicleDetails";
+import storedData from "../data/GetLocalStorageData";
 
 export default function QrCodeScanner() {
 	const [result, setResult] = useState(null);
@@ -72,7 +73,6 @@ export default function QrCodeScanner() {
 		localStorage.setItem("services", JSON.stringify(storedData));
 	};
 
-	const storedData = JSON.parse(localStorage.getItem("services")) || [];
 	const dataStorageExist = storedData.filter(service => service.placa === result?.placa);
 
 	const handleSubmit = e => {

@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import QRCode from "qrcode.react";
 import jsPDF from "jspdf";
-
+import storedData from "../data/LocalStorageData";
 import { toPng } from "html-to-image";
 
 export default function RegisterClient() {
@@ -13,7 +13,6 @@ export default function RegisterClient() {
 	const qrCodeRef = useRef(null);
 
 	const saveServicesDataToLocalStorage = () => {
-		const storedData = JSON.parse(localStorage.getItem("services")) || [];
 		storedData.push({
 			cliente: name,
 			placa: plate,
@@ -26,10 +25,17 @@ export default function RegisterClient() {
 	};
 
 	const handleFormSubmit = event => {
+		const clientExist = storedData.filter(cliente => cliente.placa === plate);
 		event.preventDefault();
-		const qrCodeString = `{"cliente":"${name}", "placa":"${plate}", "modelo":"${model}"}`;
-		saveServicesDataToLocalStorage();
-		setQRCodeData(qrCodeString);
+		if (clientExist.length) {
+			alert("esse carro já esta cadastrado");
+		}
+		if (!clientExist.length) {
+			const qrCodeString = `{"cliente":"${name}", "placa":"${plate}", "modelo":"${model}"}`;
+
+			setQRCodeData(qrCodeString);
+			saveServicesDataToLocalStorage();
+		}
 	};
 
 	const handleDownloadQRCode = () => {
@@ -94,22 +100,20 @@ export default function RegisterClient() {
 						>
 							Registrar Cliente
 						</button>
+						<button
+							className='bg-green hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2 w-full'
+							onClick={handleDownloadQRCode}
+						>
+							Download qr code
+						</button>
 					</form>
-					<button
-						className='bg-green hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2 w-full'
-						onClick={handleDownloadQRCode}
-					>
-						Download qr code
-					</button>
 				</div>
 				{qrCodeData && (
 					<div className='mt-8 w-full md:w-1/2 lg:w-1/3'>
 						<div ref={qrCodeRef} className='flex flex-col'>
 							<QRCode value={qrCodeData} size={256} id='qr-code' className='mb-4' />
-							
-								<span className='text-lg font-bold mb-2'>Placa: {plate}</span>
-								<span className='text-lg font-bold mb-2'>Modelo: {model}</span>
-							
+							<span className='text-lg font-bold mb-2'>Placa: {plate}</span>
+							<span className='text-lg font-bold mb-2'>Modelo: {model}</span>
 						</div>
 					</div>
 				)}

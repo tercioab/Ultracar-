@@ -28,40 +28,47 @@ export default function QrCodeScanner() {
 		});
 	}, []);
 
+	const updateExistingService = (storedData, existingServiceIndex) => {
+		storedData[existingServiceIndex] = {
+		  ...storedData[existingServiceIndex],
+		  responsavel: responsibleForService,
+		  data_inicio: generateDate(),
+		  status: "Em andamento",
+		};
+	};
+	
+
+	const createNewService = (storedData) => {
+		const newService = {
+		  cliente: result.cliente,
+		  placa: result.placa,
+		  modelo: result.modelo,
+		  responsavel: responsibleForService,
+		  data_inicio: generateDate(),
+		  status: "Em andamento",
+		};
+		storedData.push(newService);
+	  };
+	  
+
 	const updateServiceDataToLocalStorage = () => {
 		const storedData = JSON.parse(localStorage.getItem("services")) || [];
-
+	  
 		const existingServiceIndex = storedData.findIndex(
-			service => service.placa === result.placa,
+		  service => service.placa === result.placa,
 		);
-
-		console.log(storedData, "ddd")
-		const serviceToUpdateOrCreate =
-			existingServiceIndex >= 0
-				? { 
-						...storedData[existingServiceIndex],
-						responsavel: responsibleForService,
-						data_inicio: generateDate(),
-						status: "Em andamento",
-				  }
-				: {
-						cliente: result.cliente,
-						placa: result.placa,
-						modelo: result.modelo,
-						responsavel: responsibleForService,
-						data_inicio: generateDate(),
-						status: "Em andamento",
-				  };
-
-
+	  
+		console.log(storedData, "ddd");
+	  
 		if (existingServiceIndex >= 0) {
-			storedData.splice(existingServiceIndex, 1, serviceToUpdateOrCreate);
+		  updateExistingService(storedData, existingServiceIndex);
 		} else {
-			storedData.push(serviceToUpdateOrCreate);
+		  createNewService(storedData);
 		}
-
+	  
 		localStorage.setItem("services", JSON.stringify(storedData));
-	};
+	  };
+
 
 	const storedData = JSON.parse(localStorage.getItem("services")) || [];
 	const dataStorageExist = storedData.filter(service => service.placa === result?.placa);

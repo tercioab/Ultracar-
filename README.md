@@ -78,11 +78,8 @@ Reconheço que um dos pontos fracos do projeto foi a falta de testes automatizad
 
 ## Pontos para melhorar futuramente 🤝
 
-Para melhorar o projeto, pretendo utilizar a Context API do React para gerenciar alguns estados e, assim, simplificar o gerenciamento de dados em diferentes componentes.
-
-Também quero componentizar cada um dos componentes em seus respectivos diretórios, tornando o código mais limpo e organizado.
-
-Por fim, uma das minhas metas é implementar testes automatizados para garantir a qualidade e manutenibilidade do código.
+Implementação back-end
+e implementar testes automatizados para garantir a qualidade e manutenibilidade do código.
 
 ## Observações finais ❤️
 

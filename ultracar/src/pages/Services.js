@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import generateDate from "../Utils/GenerateData";
+import storedData from "../data/GetLocalStorageData";
+import SetLocalStorageData from "../data/SetLocalStorageData";
 
 export default function Services() {
 	const [responsibleForService, setResponsibleForService] = useState("");
@@ -8,9 +10,9 @@ export default function Services() {
 	const [collaboratorsSelected, setCollaboratorsSelected] = useState("");
 	let navigate = useNavigate();
 
-	const storedData = JSON.parse(localStorage.getItem("services")) || [];
-
-	const collaborators = Array.from(new Set(storedData.map(({responsavel}) => responsavel)));
+	const collaborators = Array.from(
+		new Set(storedData.map(({ responsavel }) => responsavel)),
+	);
 
 	const filteredDataByCollaborators =
 		collaboratorsSelected !== ""
@@ -18,7 +20,6 @@ export default function Services() {
 			: storedData;
 
 	const updateServiceDataToLocalStorage = () => {
-		const storedData = JSON.parse(localStorage.getItem("services")) || [];
 		const updatedData = storedData.filter(service => {
 			if (service.placa === serviceSelected.placa) {
 				service.responsavel = responsibleForService;
@@ -28,13 +29,17 @@ export default function Services() {
 			}
 			return service;
 		});
-		localStorage.setItem("services", JSON.stringify(updatedData));
-
+		SetLocalStorageData(updatedData);
 		navigate("/iniciar-servico");
 	};
 
+	const selectService = placa => {
+		const service = storedData.find(data => data.placa === placa);
+		localStorage.setItem("plate", placa);
+		setServiceSelected(service);
+	};
+
 	const endService = placa => {
-		const storedData = JSON.parse(localStorage.getItem("services")) || [];
 		alert("serviço finalizado");
 
 		const updatedData = storedData.map(service => {
@@ -42,18 +47,18 @@ export default function Services() {
 				return {
 					...service,
 					status: "Finalizado",
-					data_termino: generateDate()
+					data_termino: generateDate(),
 				};
 			}
 			return service;
 		});
-		localStorage.setItem("services", JSON.stringify(updatedData));
+		SetLocalStorageData(updatedData);
 	};
 
-	const selectService = placa => {
-		const service = storedData.find(data => data.placa === placa);
-		localStorage.setItem("plate", placa);
-		setServiceSelected(service);
+	const excludeService = placa => {
+		alert("serviço excluido");
+		const updateData = storedData.filter(service => service.placa !== placa);
+		SetLocalStorageData(updateData);
 	};
 
 	return (
@@ -92,6 +97,7 @@ export default function Services() {
 									<th className='px-4 py-2'>Data Término</th>
 									<th className='px-4 py-2'></th>
 									<th className='px-4 py-2'></th>
+									<th className='px-4 py-2'></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -123,7 +129,7 @@ export default function Services() {
 										</td>
 										<td className='border border-gray px-4 py-2 text-center whitespace-nowrap'>
 											<button
-												className={`bg-green hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full ${
+												className={`bg-green hover:bg-blue-700 active:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full ${
 													data.data_inicio && "cursor-not-allowed opacity-50"
 												}`}
 												onClick={() => selectService(data.placa)}
@@ -133,12 +139,22 @@ export default function Services() {
 										</td>
 										<td className='border border-gray px-4 py-2 text-center'>
 											<button
-												className={`bg-red  text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full ${
+												className={`bg-red hover:bg-red-700 active:bg-red-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full ${
 													data.data_termino && "cursor-not-allowed opacity-50"
 												}`}
 												onClick={() => endService(data.placa)}
 											>
 												Finalizar Serviço
+											</button>
+										</td>
+										<td className='border border-gray px-4 py-2 text-center'>
+											<button
+												className={`bg-red hover:bg-red-700 active:bg-red-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full ${
+													data.data_termino && "cursor-not-allowed opacity-50"
+												}`}
+												onClick={() => excludeService(data.placa)}
+											>
+												Excluir Serviço
 											</button>
 										</td>
 									</tr>

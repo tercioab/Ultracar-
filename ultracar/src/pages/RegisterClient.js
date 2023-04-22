@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import QRCode from "qrcode.react";
 import jsPDF from "jspdf";
-import storedData from "../data/LocalStorageData";
+import storedData from "../data/GetLocalStorageData";
 import { toPng } from "html-to-image";
 
 export default function RegisterClient() {

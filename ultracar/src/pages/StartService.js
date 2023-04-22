@@ -52,7 +52,7 @@ export default function StartService() {
 			<h2 className='text-2xl font-bold mb-4'>Peças Selecionadas</h2>
 			<table className='w-full'>
 				<thead>
-					<tr className='bg-gray-100'>
+					<tr className='bg-gray-300'>
 						<th className='text-left py-2 px-3'>Peça</th>
 						<th className='text-left py-2 px-3'>Preço</th>
 						<th className='text-left py-2 px-3'></th>
@@ -65,7 +65,7 @@ export default function StartService() {
 							<td className='py-2 px-3'>R$ {Number(pice.price).toFixed(2)}</td>
 							<td className='py-2 px-3'>
 								<button
-									className='bg-red hover:bg-red text-white font-bold py-2 px-4 rounded'
+									className='bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'
 									onClick={() => removePice(pice)}
 								>
 									Remover
@@ -76,7 +76,7 @@ export default function StartService() {
 				</tbody>
 			</table>
 			<button
-				className='bg-green hover:bg-red text-white font-bold py-2 px-4 rounded mt-4'
+				className='bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4'
 				onClick={updateServiceDataToLocalStorage}
 			>
 				iniciar serviço

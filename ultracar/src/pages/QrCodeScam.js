@@ -95,7 +95,7 @@ export default function QrCodeScanner() {
 			<h1 className='text-1xl mb-4'>APONTE A CÂMERA PARA O QR CODE</h1>
 
 			<div
-				className='relative bg-blue-300  p-20  border-4 border-blue-500'
+				className='relative bg-black  p-20  border-4 border-blue-500'
 				style={{ width: "220px", height: "220px" }}
 			>
 				<video

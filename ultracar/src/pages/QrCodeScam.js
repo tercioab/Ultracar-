@@ -13,20 +13,25 @@ export default function QrCodeScanner() {
 
 	// escaneia o qr code
 	useEffect(() => {
-		QrScanner.hasCamera().then(hasCamera => {
+		const startScanner = async () => {
+		  try {
+			const hasCamera = await QrScanner.hasCamera();
 			if (!hasCamera) {
-				console.error("Camera not found.");
-				return;
+			  throw new Error("Camera not found.");
 			}
 			const qrScanner = new QrScanner(videoRef.current, result =>
-				setResult(JSON.parse(result)),
+			  setResult(JSON.parse(result)),
 			);
 			qrScanner.start();
 			return () => {
-				qrScanner.destroy();
+			  qrScanner.destroy();
 			};
-		});
-	}, []);
+		  } catch (error) {
+			console.error(error);
+		  }
+		};
+		startScanner();
+	  }, []);
 
 	const updateExistingService = (storedData, existingServiceIndex) => {
 		storedData[existingServiceIndex] = {
@@ -76,8 +81,8 @@ export default function QrCodeScanner() {
 	const handleSubmit = e => {
 		e.preventDefault();
 		localStorage.setItem("plate", result.placa);
-		navigate("/iniciar-servico");
 		updateServiceDataToLocalStorage();
+		navigate("/iniciar-servico");
 	};
 
 	function isButtonDisabled(dataStorageExist) {

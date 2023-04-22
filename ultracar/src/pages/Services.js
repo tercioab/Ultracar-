@@ -40,25 +40,34 @@ export default function Services() {
 	};
 
 	const endService = placa => {
-		alert("serviço finalizado");
-
 		const updatedData = storedData.map(service => {
-			if (service.placa === placa) {
+			if (service.placa === placa && service.data_inicio) {
 				return {
 					...service,
 					status: "Finalizado",
 					data_termino: generateDate(),
 				};
 			}
+			
 			return service;
 		});
+
 		SetLocalStorageData(updatedData);
+		window.location.reload();
+		alert(updatedData.some(service => service.placa === placa && service.status === "Finalizado")
+			? "Serviço finalizado"
+			: "Algo está errado"
+		);
 	};
+	
 
 	const excludeService = placa => {
-		alert("serviço excluido");
-		const updateData = storedData.filter(service => service.placa !== placa);
-		SetLocalStorageData(updateData);
+		if (window.confirm("Tem certeza que deseja excluir este serviço?")) {
+			alert("serviço excluido");
+			const updatedData = storedData.filter(service => service.placa !== placa);
+			SetLocalStorageData(updatedData);
+			window.location.reload();
+		}
 	};
 
 	return (
@@ -131,7 +140,8 @@ export default function Services() {
 											<button
 												className={`bg-green-500 hover:bg-green-700 active:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full ${
 													data.data_inicio && "cursor-not-allowed opacity-50"
-												}`}
+													}`}
+												disabled={data.data_inicio}
 												onClick={() => selectService(data.placa)}
 											>
 												Selecionar
@@ -141,7 +151,8 @@ export default function Services() {
 											<button
 												className={`bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full ${
 													data.data_termino && "cursor-not-allowed opacity-50"
-												}`}
+													}`}
+													disabled={data.data_termino}
 												onClick={() => endService(data.placa)}
 											>
 												Finalizar
@@ -149,9 +160,8 @@ export default function Services() {
 										</td>
 										<td className='border border-gray px-4 py-2 text-center'>
 											<button
-												className={`bg-red-500 hover:bg-red-700 active:bg-red-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full ${
-													data.data_termino && "cursor-not-allowed opacity-50"
-												}`}
+												className={`bg-red-500 hover:bg-red-700 active:bg-red-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full`}
+										
 												onClick={() => excludeService(data.placa)}
 											>
 												Excluir
@@ -194,7 +204,7 @@ export default function Services() {
 				)}
 				<button
 					onClick={updateServiceDataToLocalStorage}
-					className={`bg-green  w-full  mb-16 text-white font-semibold py-2 px-4 rounded-md mt-4 ${
+					className={`bg-green-600 hover:bg-green-700  w-full  mb-16 text-white font-semibold py-2 px-4 rounded-md mt-4 ${
 						responsibleForService && serviceSelected
 							? "cursor-pointer hover:bg-blue-600"
 							: "cursor-not-allowed opacity-50"

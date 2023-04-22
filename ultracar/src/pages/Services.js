@@ -86,7 +86,7 @@ export default function Services() {
 					<div className=' overflow-x-auto justify-center '>
 						<table className='md:table-fixed '>
 							<thead>
-								<tr className='bg-gray'>
+								<tr className='bg-gray-300'>
 									<th className='px-4 py-2'>Cliente</th>
 									<th className='px-4 py-2'>Responsável</th>
 									<th className='px-4 py-2'>Placa</th>
@@ -129,32 +129,32 @@ export default function Services() {
 										</td>
 										<td className='border border-gray px-4 py-2 text-center whitespace-nowrap'>
 											<button
-												className={`bg-green hover:bg-blue-700 active:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full ${
+												className={`bg-green-500 hover:bg-green-700 active:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full ${
 													data.data_inicio && "cursor-not-allowed opacity-50"
 												}`}
 												onClick={() => selectService(data.placa)}
 											>
-												Selecionar Serviço
+												Selecionar
 											</button>
 										</td>
 										<td className='border border-gray px-4 py-2 text-center'>
 											<button
-												className={`bg-red hover:bg-red-700 active:bg-red-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full ${
+												className={`bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full ${
 													data.data_termino && "cursor-not-allowed opacity-50"
 												}`}
 												onClick={() => endService(data.placa)}
 											>
-												Finalizar Serviço
+												Finalizar
 											</button>
 										</td>
 										<td className='border border-gray px-4 py-2 text-center'>
 											<button
-												className={`bg-red hover:bg-red-700 active:bg-red-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full ${
+												className={`bg-red-500 hover:bg-red-700 active:bg-red-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full ${
 													data.data_termino && "cursor-not-allowed opacity-50"
 												}`}
 												onClick={() => excludeService(data.placa)}
 											>
-												Excluir Serviço
+												Excluir
 											</button>
 										</td>
 									</tr>

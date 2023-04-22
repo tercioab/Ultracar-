@@ -95,7 +95,7 @@ export default function QrCodeScanner() {
 			<h1 className='text-1xl mb-4'>APONTE A CÂMERA PARA O QR CODE</h1>
 
 			<div
-				className='relative bg-blue-2  p-20  border-4 border-blue-1'
+				className='relative bg-blue-300  p-20  border-4 border-blue-500'
 				style={{ width: "220px", height: "220px" }}
 			>
 				<video
@@ -131,10 +131,10 @@ export default function QrCodeScanner() {
 					<button
 						href='/register-client'
 						type='submit'
-						className={`bg-green text-white font-semibold py-2 px-4 rounded-md mt-4 ${
+						className={`bg-blue-600 text-white font-semibold py-2 px-4 rounded-md mt-4 ${
 							!isButtonDisabled(dataStorageExist)
 								? "cursor-not-allowed opacity-50"
-								: "cursor-pointer hover:bg-blue-600"
+								: "cursor-pointer hover:bg-blue-700"
 						}`}
 						disabled={!isButtonDisabled(dataStorageExist)}
 					>

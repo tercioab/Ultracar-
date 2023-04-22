@@ -14,66 +14,63 @@ export default function QrCodeScanner() {
 	// escaneia o qr code
 	useEffect(() => {
 		const startScanner = async () => {
-		  try {
-			const hasCamera = await QrScanner.hasCamera();
-			if (!hasCamera) {
-			  throw new Error("Camera not found.");
+			try {
+				const hasCamera = await QrScanner.hasCamera();
+				if (!hasCamera) {
+					throw new Error("Camera not found.");
+				}
+				const qrScanner = new QrScanner(videoRef.current, result =>
+					setResult(JSON.parse(result)),
+				);
+				qrScanner.start();
+				return () => {
+					qrScanner.destroy();
+				};
+			} catch (error) {
+				console.error(error);
 			}
-			const qrScanner = new QrScanner(videoRef.current, result =>
-			  setResult(JSON.parse(result)),
-			);
-			qrScanner.start();
-			return () => {
-			  qrScanner.destroy();
-			};
-		  } catch (error) {
-			console.error(error);
-		  }
 		};
 		startScanner();
-	  }, []);
+	}, []);
 
 	const updateExistingService = (storedData, existingServiceIndex) => {
 		storedData[existingServiceIndex] = {
-		  ...storedData[existingServiceIndex],
-		  responsavel: responsibleForService,
-		  data_inicio: generateDate(),
-		  status: "Em andamento",
+			...storedData[existingServiceIndex],
+			responsavel: responsibleForService,
+			data_inicio: generateDate(),
+			status: "Em andamento",
 		};
 	};
-	
 
-	const createNewService = (storedData) => {
+	const createNewService = storedData => {
 		const newService = {
-		  cliente: result.cliente,
-		  placa: result.placa,
-		  modelo: result.modelo,
-		  responsavel: responsibleForService,
-		  data_inicio: generateDate(),
-		  status: "Em andamento",
+			cliente: result.cliente,
+			placa: result.placa,
+			modelo: result.modelo,
+			responsavel: responsibleForService,
+			data_inicio: generateDate(),
+			status: "Em andamento",
 		};
 		storedData.push(newService);
-	  };
-	  
+	};
 
 	const updateServiceDataToLocalStorage = () => {
 		const storedData = JSON.parse(localStorage.getItem("services")) || [];
-	  
-		const existingServiceIndex = storedData.findIndex(
-		  service => service.placa === result.placa,
-		);
-	  
-		console.log(storedData, "ddd");
-	  
-		if (existingServiceIndex >= 0) {
-		  updateExistingService(storedData, existingServiceIndex);
-		} else {
-		  createNewService(storedData);
-		}
-	  
-		localStorage.setItem("services", JSON.stringify(storedData));
-	  };
 
+		const existingServiceIndex = storedData.findIndex(
+			service => service.placa === result.placa,
+		);
+
+		console.log(storedData, "ddd");
+
+		if (existingServiceIndex >= 0) {
+			updateExistingService(storedData, existingServiceIndex);
+		} else {
+			createNewService(storedData);
+		}
+
+		localStorage.setItem("services", JSON.stringify(storedData));
+	};
 
 	const storedData = JSON.parse(localStorage.getItem("services")) || [];
 	const dataStorageExist = storedData.filter(service => service.placa === result?.placa);
@@ -91,11 +88,11 @@ export default function QrCodeScanner() {
 	}
 
 	return (
-		<div className='flex flex-col justify-center items-center h-screen'>
+		<div className='flex flex-col justify-center items-center h-screen '>
 			<h1 className='text-1xl mb-4'>APONTE A CÂMERA PARA O QR CODE</h1>
 
 			<div
-				className='relative bg-black  p-20  border-4 border-blue-500'
+				className='relative bg-black  p-20  border-4 border-blue-500 '
 				style={{ width: "220px", height: "220px" }}
 			>
 				<video
